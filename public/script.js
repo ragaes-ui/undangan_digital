@@ -1,12 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
     AOS.init({ duration: 1000, once: false, mirror: true, offset: 50 });
 
+    // === 1. FITUR DYNAMIC URL NAMA TAMU ===
+    const urlParams = new URLSearchParams(window.location.search);
+    const namaTamu = urlParams.get('to');
+
+    if (namaTamu) {
+        const namaDidecode = decodeURIComponent(namaTamu);
+        
+        // Update teks nama tamu di cover halaman depan
+        const elemenNamaTamu = document.getElementById('nama-tamu') || document.getElementById('nama-tamu-url');
+        if (elemenNamaTamu) {
+            elemenNamaTamu.innerText = namaDidecode;
+        }
+    }
+
     // Efek Bunga Jatuh (Hujan Kelopak)
     function createPetals() {
         const container = document.getElementById('petal-container');
         if (!container) return;
         
-        const petalCount = 35; // Tambah jumlah bunga biar lebih rimbun
+        const petalCount = 35; 
         
         for (let i = 0; i < petalCount; i++) {
             let petal = document.createElement('div');
@@ -27,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
             container.appendChild(petal);
         }
     }
-    createPetals(); // Panggil fungsi bunganya
+    createPetals(); 
 });
 
 function bukaUndangan() {
@@ -141,11 +155,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     } catch (err) { console.error("Error", err); }
 
+    // === 2. OTOMATIS ISI FORM RSVP BERDASARKAN NAMA TAMU ===
     const urlParams = new URLSearchParams(window.location.search);
     const guestName = urlParams.get('to');
-    if (guestName) {
-        document.getElementById('nama-tamu-url').innerText = guestName;
-        document.getElementById('name').value = guestName;
+    if (guestName && document.getElementById('name')) {
+        document.getElementById('name').value = decodeURIComponent(guestName);
     }
 
     document.getElementById('rsvpForm').addEventListener('submit', async (e) => {
