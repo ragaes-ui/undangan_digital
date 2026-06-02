@@ -36,7 +36,7 @@
             background-color: #C5A880;
             border-radius: 150% 0 150% 0;
             animation: fall linear infinite, sway ease-in-out infinite alternate;
-            z-index: 99; /* <-- Diubah ke 99 biar selalu di paling depan layar */
+            z-index: 99;
             pointer-events: none;
             box-shadow: 0 0 5px rgba(197, 168, 128, 0.3);
         }
@@ -57,16 +57,19 @@
     <!-- WADAH BUNGA JATUH -->
     <div id="petal-container" class="fixed inset-0 pointer-events-none z-[99] overflow-hidden"></div>
 
-<!-- 🎵 AUDIO -->
+    <!-- 🎵 AUDIO -->
     <audio id="bg-music" loop>
         <source src="/videoplayback.mp3" type="audio/mpeg">
     </audio>
+
     <div id="cover-page" class="fixed inset-0 z-[60] flex flex-col items-center justify-center text-center p-6 bg-cover bg-center transition-all duration-[1.5s] ease-in-out" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1080');">
         <div class="z-10 text-white max-w-lg w-full border border-white/30 p-8 rounded-t-full rounded-b-3xl backdrop-blur-sm" data-aos="zoom-in" data-aos-duration="1500">
             <p class="text-xs tracking-[0.3em] uppercase mb-4 text-gray-300 font-sans">The Wedding Of</p>
-<h1 id="cover-nama" class="font-handwriting text-6xl md:text-7xl mb-6 text-gold drop-shadow-lg">Raga & Maya</h1>            <div class="mb-10">
+            <h1 id="cover-nama" class="font-handwriting text-6xl md:text-7xl mb-6 text-gold drop-shadow-lg">Raga & Maya</h1>            
+            <div class="mb-10">
                 <p class="text-xs font-light mb-2 opacity-80">Kepada Yth.</p>
-                <p class="text-xl font-serif font-semibold text-white mb-1" id="nama-tamu-url">Tamu Undangan</p>
+                <!-- ID DI SINI SUDAH DISINKRONKAN MENJADI nama-tamu -->
+                <p class="text-xl font-serif font-semibold text-white mb-1" id="nama-tamu">Tamu Undangan</p>
                 <div class="w-12 h-[1px] bg-gold mx-auto"></div>
             </div>
             <button onclick="bukaUndangan()" class="animate-pulse bg-gold text-white px-8 py-3 rounded-full text-sm hover:scale-105 transition duration-300 shadow-[0_0_15px_rgba(197,168,128,0.5)]">
