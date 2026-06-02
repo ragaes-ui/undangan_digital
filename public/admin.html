@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Admin | Undangan Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <div id="login-panel" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+            <h2 class="text-2xl font-bold text-center mb-6">Login Admin</h2>
+            <form id="loginForm" class="space-y-4">
+                <input type="text" id="username" placeholder="Username" required class="w-full p-3 border rounded-xl outline-none">
+                <input type="password" id="password" placeholder="Password" required class="w-full p-3 border rounded-xl outline-none">
+                <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-xl font-semibold">Masuk</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="dashboard-panel" class="hidden">
+        <nav class="bg-white shadow px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold">Admin Undangan Digital</h1>
+            <button id="logoutBtn" class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm">Logout</button>
+        </nav>
+
+        <div class="max-w-7xl mx-auto p-6 grid md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border space-y-4 md:col-span-1">
+                <h2 class="text-lg font-bold text-gray-700 border-b pb-2">Edit Konten Undangan</h2>
+                
+                <form id="configForm" class="space-y-4 text-sm">
+                    <!-- Kisah Cinta -->
+                    <div class="mb-4">
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-2 border-b pb-1">Perjalanan Cinta (Opsional)</label>
+                        <!-- Cerita 1 -->
+                        <div class="bg-gray-50 p-3 rounded-lg mb-2 border">
+                            <p class="text-xs font-bold text-gray-400 mb-2">Kisah 1 (Awal Bertemu)</p>
+                            <input type="text" id="story1-title" placeholder="Judul" class="w-full p-2 border rounded mb-2">
+                            <input type="text" id="story1-date" placeholder="Waktu (Misal: Jan 2024)" class="w-full p-2 border rounded mb-2">
+                            <textarea id="story1-desc" placeholder="Cerita singkat..." class="w-full p-2 border rounded text-xs"></textarea>
+                        </div>
+                        <!-- Cerita 2 -->
+                        <div class="bg-gray-50 p-3 rounded-lg border">
+                            <p class="text-xs font-bold text-gray-400 mb-2">Kisah 2 (Pertunangan/Pernikahan)</p>
+                            <input type="text" id="story2-title" placeholder="Judul" class="w-full p-2 border rounded mb-2">
+                            <input type="text" id="story2-date" placeholder="Waktu" class="w-full p-2 border rounded mb-2">
+                            <textarea id="story2-desc" placeholder="Cerita singkat..." class="w-full p-2 border rounded text-xs"></textarea>
+                        </div>
+                    </div>
+<!-- Mempelai -->
+                    <div class="mb-4">
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">Data Mempelai Pria</label>
+                        <input type="text" id="pria" placeholder="Nama Panggilan Pria" class="w-full p-2.5 border rounded-lg mb-2">
+                        <input type="text" id="ortuPria" placeholder="Nama Orang Tua (Misal: Bpk Budi & Ibu Ani)" class="w-full p-2.5 border rounded-lg mb-2">
+                        <input type="text" id="urlFotoPria" placeholder="Link Foto Pria (Bulat)" class="w-full p-2.5 border rounded-lg mb-2">
+                        <input type="text" id="igPria" placeholder="Link Instagram Pria" class="w-full p-2.5 border rounded-lg mb-4">
+                        
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">Data Mempelai Wanita</label>
+                        <input type="text" id="wanita" placeholder="Nama Panggilan Wanita" class="w-full p-2.5 border rounded-lg mb-2">
+                        <input type="text" id="ortuWanita" placeholder="Nama Orang Tua Wanita" class="w-full p-2.5 border rounded-lg mb-2">
+                        <input type="text" id="urlFotoWanita" placeholder="Link Foto Wanita (Bulat)" class="w-full p-2.5 border rounded-lg mb-2">
+                        <input type="text" id="igWanita" placeholder="Link Instagram Wanita" class="w-full p-2.5 border rounded-lg">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Detail Acara</label>
+                        <input type="text" id="tgl" placeholder="Tanggal Acara (Contoh: Minggu, 15 Nov 2026)" class="w-full p-2.5 border rounded-lg mb-2">
+                        <input type="text" id="akd" placeholder="Jam Akad" class="w-full p-2.5 border rounded-lg mb-2">
+                        <input type="text" id="altAkd" placeholder="Alamat & Tempat Akad" class="w-full p-2.5 border rounded-lg mb-2">
+                        <input type="text" id="altRsp" placeholder="Alamat & Tempat Resepsi" class="w-full p-2.5 border rounded-lg">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Amplop Digital / Bank</label>
+                        <input type="text" id="bnk" placeholder="Nama Bank (Contoh: BCA)" class="w-full p-2.5 border rounded-lg mb-2">
+                        <input type="text" id="rek" placeholder="Nomor Rekening" class="w-full p-2.5 border rounded-lg mb-2">
+                        <input type="text" id="an" placeholder="Atas Nama Rekening" class="w-full p-2.5 border rounded-lg">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Foto Undangan (Paste Link URL)</label>
+                        <input type="text" id="hero" placeholder="Link Foto Cover / Utama" class="w-full p-2.5 border rounded-lg mb-2">
+                        
+                        <input type="text" id="galeri1" placeholder="Link Foto Galeri 1" class="w-full p-2.5 border rounded-lg mb-2">
+                        <input type="text" id="galeri2" placeholder="Link Foto Galeri 2" class="w-full p-2.5 border rounded-lg mb-2">
+                        <input type="text" id="galeri3" placeholder="Link Foto Galeri 3" class="w-full p-2.5 border rounded-lg mb-2">
+                        <input type="text" id="galeri4" placeholder="Link Foto Galeri 4" class="w-full p-2.5 border rounded-lg mb-2">
+                        <input type="text" id="galeri5" placeholder="Link Foto Galeri 5" class="w-full p-2.5 border rounded-lg mb-2">
+                        <input type="text" id="galeri6" placeholder="Link Foto Galeri 6" class="w-full p-2.5 border rounded-lg">
+                    </div>
+
+                    <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-xl font-bold text-base hover:bg-blue-700 transition shadow-md">
+                        Simpan Semua Data ke Database
+                    </button>
+                </form>
+
+                <hr class="my-4">
+                
+                <h2 class="text-lg font-bold text-gray-700">Buat Teks & Link WA</h2>
+                <div class="space-y-2">
+                    <input type="text" id="targetName" placeholder="Nama Tamu yang Diundang" class="w-full p-2.5 border rounded-lg">
+                    <button id="generateBtn" class="w-full bg-emerald-600 text-white p-2.5 rounded-lg font-semibold hover:bg-emerald-700">Generate WA Text</button>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border md:col-span-2 h-fit">
+                <h2 class="text-lg font-bold mb-4 text-gray-700 border-b pb-2">Daftar Kehadiran Tamu (RSVP)</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 border-b text-sm text-gray-600">
+                                <th class="p-3 font-semibold">Nama Tamu</th>
+                                <th class="p-3 font-semibold">Konfirmasi Kehadiran</th>
+                                <th class="p-3 font-semibold">Ucapan / Doa</th>
+                            </tr>
+                        </thead>
+                        <tbody id="guestTableBody">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const loginPanel = document.getElementById('login-panel');
+            const dashboardPanel = document.getElementById('dashboard-panel');
+
+            if (sessionStorage.getItem('isAdminLoggedIn') === 'true') { showDashboard(); }
+
+            // Handle Login
+            document.getElementById('loginForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const res = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    sessionStorage.setItem('isAdminLoggedIn', 'true');
+                    showDashboard();
+                } else { alert('Username atau Password salah!'); }
+            });
+
+            // Handle Logout
+            document.getElementById('logoutBtn').addEventListener('click', async () => {
+                await fetch('/api/admin/logout', { method: 'POST' });
+                sessionStorage.removeItem('isAdminLoggedIn');
+                window.location.reload();
+            });
+
+            function showDashboard() {
+                loginPanel.classList.add('hidden');
+                dashboardPanel.classList.remove('hidden');
+                loadDataTamu();
+                loadConfigAwal();
+            }
+
+            // Dapatkan Data Tamu dari MongoDB
+            async function loadDataTamu() {
+                const res = await fetch('/api/admin/guests');
+                const result = await res.json();
+                if (result.success) {
+                    const body = document.getElementById('guestTableBody');
+                    body.innerHTML = '';
+                    result.data.forEach(g => {
+                        body.innerHTML += `
+                            <tr class="border-b text-sm hover:bg-gray-50">
+                                <td class="p-3 font-medium text-gray-800">${g.name}</td>
+                                <td class="p-3 text-blue-600 font-medium">${g.attendance}</td>
+                                <td class="p-3 text-gray-600">${g.message}</td>
+                            </tr>`;
+                    });
+                }
+            }
+
+            // Tampilkan Data yang sudah tersimpan di MongoDB ke dalam Kolom Form
+            async function loadConfigAwal() {
+                const res = await fetch('/api/wedding-info');
+                const result = await res.json();
+                if (result.success) {
+                    const d = result.data;
+                    // Tambahkan baris ini di dalam loadConfigAwal
+document.getElementById('hero').value = d.urlFotoHero || '';
+                    document.getElementById('ortuPria').value = d.ortuPria || '';
+                    document.getElementById('urlFotoPria').value = d.urlFotoPria || '';
+                    document.getElementById('igPria').value = d.igPria || '';
+                    document.getElementById('ortuWanita').value = d.ortuWanita || '';
+                    document.getElementById('urlFotoWanita').value = d.urlFotoWanita || '';
+                    document.getElementById('igWanita').value = d.igWanita || '';
+                    document.getElementById('pria').value = d.mempelaiPria || '';
+                    document.getElementById('wanita').value = d.mempelaiWanita || '';
+                    document.getElementById('tgl').value = d.tanggalAcara || '';
+                    document.getElementById('akd').value = d.jamAkad || '';
+                    document.getElementById('altAkd').value = d.alamatAkad || '';
+                    document.getElementById('altRsp').value = d.alamatResepsi || '';
+                    document.getElementById('bnk').value = d.namaBank || '';
+                    document.getElementById('rek').value = d.noRekening || '';
+                    document.getElementById('an').value = d.atasNamaRekening || '';
+                    document.getElementById('hero').value = d.urlFotoHero || '';
+                    
+                    // Pasang link foto galeri ke kolom masing-masing
+                    if (d.urlFotoGaleri) {
+                        document.getElementById('galeri1').value = d.urlFotoGaleri[0] || '';
+                        document.getElementById('galeri2').value = d.urlFotoGaleri[1] || '';
+                        document.getElementById('galeri3').value = d.urlFotoGaleri[2] || '';
+                        if (document.getElementById('galeri4')) document.getElementById('galeri4').value = d.urlFotoGaleri[3] || '';
+    if (document.getElementById('galeri5')) document.getElementById('galeri5').value = d.urlFotoGaleri[4] || '';
+    if (document.getElementById('galeri6')) document.getElementById('galeri6').value = d.urlFotoGaleri[5] || '';
+                    }
+
+                    // Tampilkan Kisah Cinta
+                    if (d.ceritaCinta) {
+                        if (d.ceritaCinta[0]) {
+                            document.getElementById('story1-title').value = d.ceritaCinta[0].judul || '';
+                            document.getElementById('story1-date').value = d.ceritaCinta[0].tanggal || '';
+                            document.getElementById('story1-desc').value = d.ceritaCinta[0].deskripsi || '';
+                        }
+                        if (d.ceritaCinta[1]) {
+                            document.getElementById('story2-title').value = d.ceritaCinta[1].judul || '';
+                            document.getElementById('story2-date').value = d.ceritaCinta[1].tanggal || '';
+                            document.getElementById('story2-desc').value = d.ceritaCinta[1].deskripsi || '';
+                        }
+                    }
+                }
+            }
+
+            // Simpan Data dari Kolom Form ke MongoDB saat di-Submit
+            document.getElementById('configForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Gabungkan input foto galeri menjadi array sebelum dikirim ke backend
+                const arrayGaleri = [
+                    document.getElementById('galeri1').value.trim(),
+                    document.getElementById('galeri2').value.trim(),
+                    document.getElementById('galeri3').value.trim(),
+                    document.getElementById('galeri4').value.trim(),
+    document.getElementById('galeri5').value.trim(),
+    document.getElementById('galeri6').value.trim()
+                ].filter(url => url !== ""); // Hapus kolom yang kosong
+
+                // Gabungkan input Kisah Cinta
+                const arrayCerita = [
+                    {
+                        judul: document.getElementById('story1-title').value.trim(),
+                        tanggal: document.getElementById('story1-date').value.trim(),
+                        deskripsi: document.getElementById('story1-desc').value.trim()
+                    },
+                    {
+                        judul: document.getElementById('story2-title').value.trim(),
+                        tanggal: document.getElementById('story2-date').value.trim(),
+                        deskripsi: document.getElementById('story2-desc').value.trim()
+                    }
+                ].filter(c => c.judul !== ""); // Jangan kirim cerita kalau judulnya kosong
+
+                const payload = {
+                    urlFotoHero: document.getElementById('hero').value,
+                    ortuPria: document.getElementById('ortuPria').value,
+                    urlFotoPria: document.getElementById('urlFotoPria').value,
+                    igPria: document.getElementById('igPria').value,
+                    ortuWanita: document.getElementById('ortuWanita').value,
+                    urlFotoWanita: document.getElementById('urlFotoWanita').value,
+                    igWanita: document.getElementById('igWanita').value,
+                    mempelaiPria: document.getElementById('pria').value,
+                    mempelaiWanita: document.getElementById('wanita').value,
+                    tanggalAcara: document.getElementById('tgl').value,
+                    jamAkad: document.getElementById('akd').value,
+                    alamatAkad: document.getElementById('altAkd').value,
+                    alamatResepsi: document.getElementById('altRsp').value,
+                    namaBank: document.getElementById('bnk').value,
+                    noRekening: document.getElementById('rek').value,
+                    atasNamaRekening: document.getElementById('an').value,
+                    urlFotoHero: document.getElementById('hero').value,
+                    urlFotoGaleri: arrayGaleri,
+                    ceritaCinta: arrayCerita // Kirim Kisah Cinta ke Database
+                };
+
+                const res = await fetch('/api/admin/update-info', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if(data.success) { 
+                    alert('Data undangan berhasil disimpan ke database MongoDB!'); 
+                    window.location.reload(); 
+                }
+            });
+
+            // Fitur Sebar Link WhatsApp
+            document.getElementById('generateBtn').addEventListener('click', () => {
+                const tName = document.getElementById('targetName').value.trim();
+                if (!tName) return alert('Ketik nama tamu dulu!');
+                const inviteUrl = `${window.location.origin}/?to=${encodeURIComponent(tName)}`;
+                const textWA = `Tanpa mengurangi rasa hormat, kami mengundang *${tName}* ke acara pernikahan kami.\n\nDetail lengkap: ${inviteUrl}`;
+                navigator.clipboard.writeText(textWA).then(() => {
+                    alert('Teks undangan khusus otomatis tersalin! Tinggal paste (Ctrl+V) di WhatsApp target.');
+                    document.getElementById('targetName').value = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

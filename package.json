@@ -1,0 +1,16 @@
+{
+  "name": "undangan-digital",
+  "version": "1.0.0",
+  "description": "Undangan Digital Estetik dengan Node.js & MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "mongoose": "^8.3.1"
+  }
+}
