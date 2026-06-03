@@ -237,26 +237,41 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
     <!-- 👇👇 NARO KODENYA DI SINI BANG 👇👇 -->
+<!-- Script untuk mengambil data dari Database (Versi Plus Background) -->
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
             try {
+                // Mengambil data dari backend
                 const res = await fetch('/api/wedding-info');
                 const result = await res.json();
 
                 if (result.success && result.data) {
                     const d = result.data;
+                    
+                    // 1. Menggabungkan nama pasangan
                     const namaPasangan = `${d.mempelaiPria || 'Nama'} & ${d.mempelaiWanita || 'Pasangan'}`;
 
+                    // 2. Ganti Teks
                     if (document.getElementById('cover-nama')) document.getElementById('cover-nama').innerText = namaPasangan;
                     if (document.getElementById('hero-nama')) document.getElementById('hero-nama').innerText = namaPasangan;
                     if (document.getElementById('nama-pria')) document.getElementById('nama-pria').innerText = d.mempelaiPria || '-';
                     if (document.getElementById('nama-wanita')) document.getElementById('nama-wanita').innerText = d.mempelaiWanita || '-';
+
+                    // 3. Ganti Background Dinamis dari Admin
+                    if (d.urlFotoHero) {
+                        // Mencari elemen bungkus terluar (biasanya pakai tag section, class hero, atau id hero)
+                        const heroSection = document.getElementById('hero') || document.querySelector('.hero') || document.querySelector('section');
+                        if (heroSection) {
+                            heroSection.style.backgroundImage = `url('${d.urlFotoHero}')`;
+                            heroSection.style.backgroundSize = 'cover';
+                            heroSection.style.backgroundPosition = 'center';
+                        }
+                    }
                 }
             } catch (error) {
                 console.error("Gagal mengambil data dari database:", error);
             }
         });
     </script>
-    <!-- 👆👆 NARO KODENYA DI SINI BANG 👆👆 -->
 </body>
 </html>
