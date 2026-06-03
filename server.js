@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const session = require('express-session');
+
 
 const Guest = require('./models/Guest');
 const WeddingConfig = require('./models/WeddingConfig');
@@ -17,12 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 // 1. Session Secret langsung ditanam di sini
-app.use(session({
-    secret: 'kuncirahasiaundangan123',
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 }
-}));
+
 
 // 2. Link MongoDB Atlas langsung ditanam di sini
 const mongoURI = 'mongodb+srv://undangan_digital:raga151204@cluster0.rutgg.mongodb.net/undangan_digital?retryWrites=true&w=majority';
