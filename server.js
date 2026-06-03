@@ -2,32 +2,31 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-
 const Guest = require('./models/Guest');
 const WeddingConfig = require('./models/WeddingConfig');
 
 const app = express();
-app.use(cors({
-    origin: true,
-    credentials: true
-}));
+app.use(cors({ origin: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use(express.static('public'));
 
-// 1. Session Secret langsung ditanam di sini
-
-
-// 2. Link MongoDB Atlas langsung ditanam di sini
 const mongoURI = 'mongodb+srv://undangan_digital:raga151204@cluster0.rutgg.mongodb.net/undangan_digital?retryWrites=true&w=majority';
 
-mongoose.connect(mongoURI)
-    .then(() => console.log('MongoDB Terkoneksi Mantap!'))
-    .catch(err => console.error('Gagal koneksi MongoDB:', err));
+// 1. JURUS ANTI-PUTUS (Mengecek koneksi setiap kali ada request)
+const connectDB = async () => {
+    if (mongoose.connection.readyState >= 1) return;
+    try {
+        await mongoose.connect(mongoURI);
+        console.log('MongoDB Terbangun dan Terkoneksi!');
+    } catch (err) {
+        console.error('Gagal membangunkan MongoDB:', err);
+    }
+};
 
 const isAdmin = (req, res, next) => {
-    if (req.session.isLoggedIn) {
+    const token = req.headers.authorization;
+    if (token === 'TOKEN_RAHASIA_RAGA_2026') {
         next();
     } else {
         res.status(401).json({ success: false, message: 'Akses ditolak.' });
@@ -37,6 +36,7 @@ const isAdmin = (req, res, next) => {
 // ==================== API TAMU / UNDANGAN ====================
 app.get('/api/wedding-info', async (req, res) => {
     try {
+        await connectDB(); // Bangunkan DB
         let config = await WeddingConfig.findOne();
         if (!config) {
             config = new WeddingConfig();
@@ -50,6 +50,7 @@ app.get('/api/wedding-info', async (req, res) => {
 
 app.post('/api/rsvp', async (req, res) => {
     try {
+        await connectDB(); // Bangunkan DB
         const { name, attendance, message } = req.body;
         const newGuest = new Guest({ name, attendance, message });
         await newGuest.save();
@@ -64,21 +65,15 @@ app.post('/api/admin/login', (req, res) => {
     const { username, password } = req.body;
     
     if (username === 'adminnikah' && password === 'rahasiabanget') {
-        // req.session SUDAH DIHAPUS, GANTI JADI KIRIM TOKEN
         res.json({ success: true, token: 'TOKEN_RAHASIA_RAGA_2026' });
     } else {
         res.status(400).json({ success: false, message: 'Kredensial salah' });
     }
 });
 
-app.post('/api/admin/logout', (req, res) => {
-    // Karena pakai token di HP/Laptop, backend tidak perlu hancurkan session lagi
-    res.json({ success: true });
-});
-
-
 app.get('/api/admin/guests', isAdmin, async (req, res) => {
     try {
+        await connectDB(); // Bangunkan DB
         const guests = await Guest.find().sort({ createdAt: -1 });
         res.json({ success: true, data: guests });
     } catch (error) {
@@ -88,10 +83,11 @@ app.get('/api/admin/guests', isAdmin, async (req, res) => {
 
 app.post('/api/admin/update-info', isAdmin, async (req, res) => {
     try {
-        // 1. Tarik SATU-SATU semua data dari request payload
+        await connectDB(); // Bangunkan DB sebelum menyimpan data!
+
         const {
             mempelaiPria, mempelaiWanita,
-            urlFotoPria, urlFotoWanita, // <-- Ini tersangka utamanya
+            urlFotoPria, urlFotoWanita, 
             ortuPria, ortuWanita, igPria, igWanita,
             tanggalAcara, jamAkad, alamatAkad, mapsAkad,
             jamResepsi, alamatResepsi, mapsResepsi,
@@ -99,7 +95,6 @@ app.post('/api/admin/update-info', isAdmin, async (req, res) => {
             urlFotoHero, urlFotoGaleri, ceritaCinta
         } = req.body;
 
-        // 2. Rapikan data galeri
         let galeriArray = [];
         if (Array.isArray(urlFotoGaleri)) {
             galeriArray = urlFotoGaleri;
@@ -107,10 +102,9 @@ app.post('/api/admin/update-info', isAdmin, async (req, res) => {
             galeriArray = urlFotoGaleri.split(',').map(url => url.trim());
         }
 
-        // 3. Tembak ke MongoDB (Pastikan urlFoto masuk ke sini)
         const updated = await WeddingConfig.findOneAndUpdate({}, {
             mempelaiPria, mempelaiWanita,
-            urlFotoPria, urlFotoWanita, // <-- WAJIB MASUK SINI
+            urlFotoPria, urlFotoWanita, 
             ortuPria, ortuWanita, igPria, igWanita,
             tanggalAcara, jamAkad, alamatAkad, mapsAkad,
             jamResepsi, alamatResepsi, mapsResepsi,
@@ -127,10 +121,14 @@ app.post('/api/admin/update-info', isAdmin, async (req, res) => {
     }
 });
 
-// Kalau jalan di laptop lokal pakai PORT, kalau di Vercel pakai export
+// 2. PENANGKAP ERROR EXPRESS (Mencegah tampilan layar putih / teks polos)
+app.use((err, req, res, next) => {
+    console.error("Express System Error:", err.stack);
+    res.status(500).json({ success: false, error: "Sistem Error: " + err.message });
+});
+
 if (process.env.NODE_ENV !== 'production') {
     const PORT = 3000;
     app.listen(PORT, () => console.log(`Server ON di port ${PORT}`));
 }
 module.exports = app;
-
