@@ -6,7 +6,6 @@
     <title>Dashboard Admin | Undangan Digital</title>
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Tambahan Font Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -15,7 +14,6 @@
 
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        /* Custom Scrollbar biar makin elegan */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
@@ -24,7 +22,6 @@
 </head>
 <body class="bg-slate-50 min-h-screen text-slate-800 selection:bg-blue-200">
 
-    <!-- LOGIN PANEL (Di-upgrade dengan efek gradasi dan glass) -->
     <div id="login-panel" class="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 flex items-center justify-center z-50 p-4">
         <div class="bg-white/95 backdrop-blur-md p-10 rounded-[2rem] shadow-2xl w-full max-w-md border border-white/20 transform transition-all">
             <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-inner">
@@ -49,15 +46,11 @@
         </div>
     </div>
 
-    <!-- DASHBOARD PANEL -->
     <div id="dashboard-panel" class="hidden">
-        <!-- Navbar Mewah -->
         <nav class="bg-white/80 backdrop-blur-lg border-b border-slate-200 sticky top-0 z-40 px-6 py-4">
             <div class="max-w-7xl mx-auto flex justify-between items-center">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 text-white rounded-xl flex items-center justify-center font-bold text-lg shadow-sm">
-                        UD
-                    </div>
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 text-white rounded-xl flex items-center justify-center font-bold text-lg shadow-sm">UD</div>
                     <div>
                         <h1 class="text-lg font-bold text-slate-800 leading-tight">Undangan Digital</h1>
                         <p class="text-xs text-slate-500 font-medium">Dashboard Management</p>
@@ -71,10 +64,8 @@
         </nav>
 
         <div class="max-w-7xl mx-auto p-4 md:p-6 grid lg:grid-cols-3 gap-6 md:gap-8 mt-4">
-            <!-- KOLOM KIRI: FORM PENGATURAN -->
             <div class="lg:col-span-1 space-y-6">
                 
-                <!-- Kotak Form Utama -->
                 <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
                     <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
                         <div class="p-2 bg-blue-50 text-blue-600 rounded-lg">
@@ -84,130 +75,113 @@
                     </div>
                     
                     <form id="configForm" class="space-y-6 text-sm">
-                        
-                        <!-- Section: Perjalanan Cinta -->
                         <div class="space-y-3">
-                            <label class="flex items-center gap-2 text-xs font-bold text-indigo-600 uppercase tracking-widest mb-2 bg-indigo-50 px-3 py-1.5 rounded-md inline-block w-fit">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                                Perjalanan Cinta
-                            </label>
-                            <!-- Cerita 1 -->
-                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 space-y-3 hover:border-indigo-200 transition-colors">
+                            <label class="flex items-center gap-2 text-xs font-bold text-indigo-600 uppercase tracking-widest mb-2 bg-indigo-50 px-3 py-1.5 rounded-md inline-block w-fit">Perjalanan Cinta</label>
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 space-y-3">
                                 <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Kisah 1 (Awal Bertemu)</p>
-                                <input type="text" id="story1-title" placeholder="Judul Kisah" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all">
-                                <input type="text" id="story1-date" placeholder="Waktu (Misal: Jan 2024)" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all">
-                                <textarea id="story1-desc" placeholder="Tulis cerita singkat di sini..." rows="2" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all"></textarea>
+                                <input type="text" id="story1-title" placeholder="Judul Kisah" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                                <input type="text" id="story1-date" placeholder="Waktu (Misal: Jan 2024)" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                                <textarea id="story1-desc" placeholder="Tulis cerita singkat di sini..." rows="2" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-500"></textarea>
                             </div>
-                            <!-- Cerita 2 -->
-                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 space-y-3 hover:border-indigo-200 transition-colors">
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 space-y-3">
                                 <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Kisah 2 (Lamaran)</p>
-                                <input type="text" id="story2-title" placeholder="Judul Kisah" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all">
-                                <input type="text" id="story2-date" placeholder="Waktu (Misal: Feb 2025)" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all">
-                                <textarea id="story2-desc" placeholder="Tulis cerita singkat di sini..." rows="2" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all"></textarea>
+                                <input type="text" id="story2-title" placeholder="Judul Kisah" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                                <input type="text" id="story2-date" placeholder="Waktu (Misal: Feb 2025)" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                                <textarea id="story2-desc" placeholder="Tulis cerita singkat di sini..." rows="2" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-500"></textarea>
                             </div>
                         </div>
 
-                        <!-- Section: Data Mempelai -->
                         <div class="space-y-4 pt-4 border-t border-slate-100">
-                            <label class="flex items-center gap-2 text-xs font-bold text-blue-600 uppercase tracking-widest bg-blue-50 px-3 py-1.5 rounded-md inline-block w-fit">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                                Mempelai Pria
-                            </label>
+                            <label class="flex items-center gap-2 text-xs font-bold text-blue-600 uppercase tracking-widest bg-blue-50 px-3 py-1.5 rounded-md inline-block w-fit">Mempelai Pria</label>
                             <div class="space-y-3">
-                                <input type="text" id="pria" placeholder="Nama Panggilan Pria" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all">
-                                <input type="text" id="ortuPria" placeholder="Nama Orang Tua (Misal: Bpk Budi & Ibu Ani)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all">
-                                <input type="text" id="urlFotoPria" placeholder="Link Foto Pria (Bulat)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all">
-                                <input type="text" id="igPria" placeholder="Link Instagram Pria (contoh: https://ig.com/nama)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all">
+                                <input type="text" id="pria" placeholder="Nama Panggilan Pria" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500">
+                                <input type="text" id="ortuPria" placeholder="Nama Orang Tua Pria" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500">
+                                <input type="text" id="urlFotoPria" placeholder="Link Foto Pria (Bulat)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500">
+                                <input type="text" id="igPria" placeholder="Link Instagram Pria" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500">
                             </div>
 
-                            <label class="flex items-center gap-2 text-xs font-bold text-pink-600 uppercase tracking-widest bg-pink-50 px-3 py-1.5 rounded-md inline-block w-fit mt-6">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                                Mempelai Wanita
-                            </label>
+                            <label class="flex items-center gap-2 text-xs font-bold text-pink-600 uppercase tracking-widest bg-pink-50 px-3 py-1.5 rounded-md inline-block w-fit mt-6">Mempelai Wanita</label>
                             <div class="space-y-3">
-                                <input type="text" id="wanita" placeholder="Nama Panggilan Wanita" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all">
-                                <input type="text" id="ortuWanita" placeholder="Nama Orang Tua Wanita" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all">
-                                <input type="text" id="urlFotoWanita" placeholder="Link Foto Wanita (Bulat)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all">
-                                <input type="text" id="igWanita" placeholder="Link Instagram Wanita" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all">
+                                <input type="text" id="wanita" placeholder="Nama Panggilan Wanita" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-pink-500">
+                                <input type="text" id="ortuWanita" placeholder="Nama Orang Tua Wanita" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-pink-500">
+                                <input type="text" id="urlFotoWanita" placeholder="Link Foto Wanita (Bulat)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-pink-500">
+                                <input type="text" id="igWanita" placeholder="Link Instagram Wanita" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-pink-500">
                             </div>
                         </div>
 
-                        <!-- Section: Detail Acara -->
                         <div class="space-y-3 pt-4 border-t border-slate-100">
-                            <label class="flex items-center gap-2 text-xs font-bold text-amber-600 uppercase tracking-widest bg-amber-50 px-3 py-1.5 rounded-md inline-block w-fit mb-2">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                Detail Acara
-                            </label>
-                            <input type="text" id="tgl" placeholder="Tanggal Acara (Contoh: Minggu, 15 Nov 2026)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all">
+                            <label class="flex items-center gap-2 text-xs font-bold text-amber-600 uppercase tracking-widest bg-amber-50 px-3 py-1.5 rounded-md inline-block w-fit mb-2">Detail Acara</label>
+                            <input type="text" id="tgl" placeholder="Tanggal Acara (Contoh: Minggu, 15 Nov 2026)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-amber-500">
                             <div class="grid grid-cols-2 gap-3">
-                                <input type="text" id="akd" placeholder="Jam Akad (08:00 WIB)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all">
-                                <input type="text" id="altAkd" placeholder="Lokasi Akad" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all">
+                                <input type="text" id="akd" placeholder="Jam Akad (08:00 WIB)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-amber-500">
+                                <input type="text" id="altAkd" placeholder="Lokasi Akad" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-amber-500">
                             </div>
-                            <input type="text" id="altRsp" placeholder="Alamat Lengkap & Tempat Resepsi" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all">
+                            <input type="text" id="altRsp" placeholder="Alamat Lengkap & Tempat Resepsi" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-amber-500">
                         </div>
 
-                        <!-- Section: Keuangan -->
                         <div class="space-y-3 pt-4 border-t border-slate-100">
-                            <label class="flex items-center gap-2 text-xs font-bold text-emerald-600 uppercase tracking-widest bg-emerald-50 px-3 py-1.5 rounded-md inline-block w-fit mb-2">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
-                                Rekening / Amplop Digital
-                            </label>
-                            <input type="text" id="bnk" placeholder="Nama Bank (Contoh: BCA / Mandiri)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all">
-                            <input type="text" id="rek" placeholder="Nomor Rekening" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all">
-                            <input type="text" id="an" placeholder="Atas Nama (A/n Raga)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all">
+                            <label class="flex items-center gap-2 text-xs font-bold text-emerald-600 uppercase tracking-widest bg-emerald-50 px-3 py-1.5 rounded-md inline-block w-fit mb-2">Rekening / Amplop Digital</label>
+                            <input type="text" id="bnk" placeholder="Nama Bank" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-emerald-500">
+                            <input type="text" id="rek" placeholder="Nomor Rekening" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-emerald-500">
+                            <input type="text" id="an" placeholder="Atas Nama" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-emerald-500">
                         </div>
 
-                        <!-- Section: Foto & Galeri -->
                         <div class="space-y-3 pt-4 border-t border-slate-100">
-                            <label class="flex items-center gap-2 text-xs font-bold text-purple-600 uppercase tracking-widest bg-purple-50 px-3 py-1.5 rounded-md inline-block w-fit mb-2">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                Foto & Galeri (Link ImgBB)
-                            </label>
-                            <input type="text" id="hero" placeholder="Link Foto Cover Depan / Utama" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all font-medium text-purple-700">
-                            
+                            <label class="flex items-center gap-2 text-xs font-bold text-purple-600 uppercase tracking-widest bg-purple-50 px-3 py-1.5 rounded-md inline-block w-fit mb-2">Foto & Galeri (Link ImgBB)</label>
+                            <input type="text" id="hero" placeholder="Link Foto Cover Depan / Utama" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-medium text-purple-700 outline-none focus:border-purple-500">
                             <div class="grid grid-cols-2 gap-3 mt-3">
-                                <input type="text" id="galeri1" placeholder="Foto Galeri 1" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all">
-                                <input type="text" id="galeri2" placeholder="Foto Galeri 2" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all">
-                                <input type="text" id="galeri3" placeholder="Foto Galeri 3" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all">
-                                <input type="text" id="galeri4" placeholder="Foto Galeri 4" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all">
-                                <input type="text" id="galeri5" placeholder="Foto Galeri 5" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all">
-                                <input type="text" id="galeri6" placeholder="Foto Galeri 6" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all">
+                                <input type="text" id="galeri1" placeholder="Foto Galeri 1" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-purple-500">
+                                <input type="text" id="galeri2" placeholder="Foto Galeri 2" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-purple-500">
+                                <input type="text" id="galeri3" placeholder="Foto Galeri 3" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-purple-500">
+                                <input type="text" id="galeri4" placeholder="Foto Galeri 4" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-purple-500">
+                                <input type="text" id="galeri5" placeholder="Foto Galeri 5" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-purple-500">
+                                <input type="text" id="galeri6" placeholder="Foto Galeri 6" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-purple-500">
                             </div>
                         </div>
 
-                        <!-- Tombol Submit -->
                         <div class="pt-6">
-                            <button type="submit" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 rounded-xl font-bold text-base shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all duration-200">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+                            <button type="submit" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 rounded-xl font-bold text-base shadow-lg shadow-blue-500/30 hover:-translate-y-0.5 transition-all">
                                 Simpan Semua Data ke Database
                             </button>
                         </div>
                     </form>
                 </div>
 
-                <!-- Kotak Generate Link WA -->
-                <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-6 md:p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-emerald-100">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="p-2 bg-emerald-100 text-emerald-600 rounded-lg">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                        </div>
-                        <h2 class="text-xl font-bold text-emerald-900">Sebar Undangan (WA)</h2>
-                    </div>
-                    
+                <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-6 md:p-8 rounded-[2rem] shadow-sm border border-emerald-100">
+                    <h2 class="text-xl font-bold text-emerald-900 mb-6">Sebar Undangan (WA)</h2>
                     <div class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-bold text-emerald-700 uppercase tracking-wider mb-2">Nama Tamu Spesifik</label>
-                            <input type="text" id="targetName" placeholder="Contoh: Bpk. Joko Widodo" class="w-full px-4 py-3 bg-white border border-emerald-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all shadow-sm">
-                        </div>
-                        <button id="generateBtn" class="w-full flex items-center justify-center gap-2 bg-emerald-600 text-white py-3.5 rounded-xl font-bold shadow-lg shadow-emerald-500/30 hover:bg-emerald-700 hover:shadow-emerald-500/50 hover:-translate-y-0.5 transition-all duration-200">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                        <input type="text" id="targetName" placeholder="Nama Tamu (Contoh: Bpk. Joko)" class="w-full px-4 py-3 bg-white border border-emerald-200 rounded-xl outline-none focus:border-emerald-500">
+                        <button id="generateBtn" class="w-full bg-emerald-600 text-white py-3.5 rounded-xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-500/30">
                             Generate Teks & Salin
                         </button>
                     </div>
                 </div>
+
+                <div class="bg-gradient-to-br from-rose-50 to-orange-50 p-6 md:p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-rose-100">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-rose-100 text-rose-600 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        </div>
+                        <h2 class="text-xl font-bold text-rose-900">Pengaturan Akun</h2>
+                    </div>
+                    
+                    <form id="accountForm" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-rose-700 uppercase tracking-wider mb-2">Username Baru</label>
+                            <input type="text" id="newUsername" placeholder="Masukkan username baru..." required class="w-full px-4 py-3 bg-white border border-rose-200 rounded-xl outline-none focus:border-rose-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-rose-700 uppercase tracking-wider mb-2">Password Baru</label>
+                            <input type="text" id="newPassword" placeholder="Masukkan password baru..." required class="w-full px-4 py-3 bg-white border border-rose-200 rounded-xl outline-none focus:border-rose-500">
+                        </div>
+                        <button type="submit" class="w-full bg-rose-600 text-white py-3.5 rounded-xl font-bold hover:bg-rose-700 transition-all shadow-lg shadow-rose-500/30">
+                            Simpan & Login Ulang
+                        </button>
+                    </form>
+                </div>
+
             </div>
 
-            <!-- KOLOM KANAN: TABEL RSVP -->
             <div class="lg:col-span-2">
                 <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 h-fit sticky top-24">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
@@ -226,18 +200,13 @@
                                 <tr class="bg-slate-50 text-xs text-slate-500 uppercase tracking-wider">
                                     <th class="p-4 font-bold border-b border-slate-200">Nama Tamu</th>
                                     <th class="p-4 font-bold border-b border-slate-200">Status</th>
-                                    <th class="p-4 font-bold border-b border-slate-200 w-1/2">Ucapan & Doa</th>
+                                    <th class="p-4 font-bold border-b border-slate-200 w-2/5">Ucapan & Doa</th>
                                     <th class="p-4 font-bold border-b border-slate-200 text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody id="guestTableBody" class="divide-y divide-slate-100">
-                                <!-- Data Tamu Muncul di Sini -->
-                                <!-- Baris Loading Default -->
                                 <tr>
-                                    <td colspan="3" class="p-8 text-center text-slate-400 text-sm italic">
-                                        <svg class="animate-spin w-6 h-6 mx-auto mb-2 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                                        Memuat data tamu...
-                                    </td>
+                                    <td colspan="4" class="p-8 text-center text-slate-400 text-sm italic">Memuat data tamu...</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -247,8 +216,7 @@
         </div>
     </div>
 
-<!-- KODE SCRIPT JAVA SCRIPT DI BAWAH INI TIDAK ADA YANG DIUBAH (SAMA PERSIS DENGAN PUNYA ABANG) -->
-<script>
+    <script>
         document.addEventListener("DOMContentLoaded", () => {
             const loginPanel = document.getElementById('login-panel');
             const dashboardPanel = document.getElementById('dashboard-panel');
@@ -258,225 +226,160 @@
                 showDashboard(); 
             }
 
-            // 2. Handle Login + Detektif Error
-            document.getElementById('loginForm').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-                
-                try {
-                    const res = await fetch('/api/admin/login', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ username, password })
-                    });
+            // 2. Handle Login
+            if(document.getElementById('loginForm')) {
+                document.getElementById('loginForm').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const username = document.getElementById('username').value;
+                    const password = document.getElementById('password').value;
+                    
+                    try {
+                        const res = await fetch('/api/admin/login', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ username, password })
+                        });
+                        
+                        if (!res.ok) {
+                            alert(`Error Server Vercel: Status ${res.status}. Pastikan backend terkoneksi!`);
+                            return;
+                        }
 
-                    // JIKA RUTENYA GAK KETEMU DI VERCEL
-                    if (!res.ok) {
-                        alert(`Error Server Vercel: Status ${res.status}.\n\nIni berarti file 'vercel.json' Abang posisinya belum benar atau belum terbaca. Pastikan 'vercel.json' ada di folder paling luar!`);
-                        return;
+                        const data = await res.json();
+                        if (data.success) {
+                            sessionStorage.setItem('isAdminLoggedIn', 'true');
+                            sessionStorage.setItem('adminToken', data.token);
+                            showDashboard();
+                        } else { 
+                            alert('Username atau Password salah!'); 
+                        }
+                    } catch (err) {
+                        alert(`Gagal konek ke backend. Error: ${err.message}`);
                     }
+                });
+            }
 
-                    const data = await res.json();
-                    if (data.success) {
-                        sessionStorage.setItem('isAdminLoggedIn', 'true');
-                        sessionStorage.setItem('adminToken', data.token); // SIMPAN TOKEN
-                        showDashboard();
-                    } else { 
-                        alert('Username atau Password salah!'); 
-                    }
-                } catch (err) {
-                    alert(`Gagal konek ke backend sama sekali. Error: ${err.message}`);
-                }
-            });
-
-            // Handle Logout
-            document.getElementById('logoutBtn').addEventListener('click', () => {
-                sessionStorage.removeItem('isAdminLoggedIn');
-                sessionStorage.removeItem('adminToken');
-                window.location.reload();
-            });
+            // 3. Handle Logout
+            if(document.getElementById('logoutBtn')) {
+                document.getElementById('logoutBtn').addEventListener('click', () => {
+                    sessionStorage.removeItem('isAdminLoggedIn');
+                    sessionStorage.removeItem('adminToken');
+                    window.location.reload();
+                });
+            }
 
             function showDashboard() {
                 loginPanel.classList.add('hidden');
                 dashboardPanel.classList.remove('hidden');
                 loadDataTamu();
                 loadConfigAwal();
+                loadAccountInfo(); // <--- INI YANG TADI KELUPAAN
             }
 
-            // Dapatkan Data Tamu (WAJIB KIRIM TOKEN)
-            async function loadDataTamu() {
-                const res = await fetch('/api/admin/guests', {
-                    headers: { 'Authorization': sessionStorage.getItem('adminToken') }
-                });
-                const result = await res.json();
-                if (result.success) {
-                    const body = document.getElementById('guestTableBody');
-                    body.innerHTML = '';
-                    
-                    if(result.data.length === 0) {
-                        body.innerHTML = `<tr><td colspan="3" class="p-8 text-center text-slate-400 text-sm">Belum ada tamu yang mengisi RSVP.</td></tr>`;
-                    }
-                    
-                    result.data.forEach(g => {
-                        // Tambahkan styling warna badge kehadiran
-                        let badgeColor = 'bg-blue-100 text-blue-700';
-                        if(g.attendance.toLowerCase().includes('tidak')) badgeColor = 'bg-rose-100 text-rose-700';
-                        if(g.attendance.toLowerCase().includes('ragu') || g.attendance.toLowerCase().includes('mungkin')) badgeColor = 'bg-amber-100 text-amber-700';
-
-                        body.innerHTML += `
-                            <tr class="text-sm hover:bg-slate-50 transition-colors group">
-                                <td class="p-4 font-semibold text-slate-800">${g.name}</td>
-                                <td class="p-4">
-                                    <span class="px-3 py-1 rounded-full text-xs font-bold ${badgeColor}">${g.attendance}</span>
-                                </td>
-                                <td class="p-4 text-slate-600 italic group-hover:text-slate-800 transition-colors">"${g.message}"</td>
-                            </tr>`;
+            // 4. Dapatkan Data Tamu & Munculkan Tombol Hapus
+            window.loadDataTamu = async function() {
+                try {
+                    const res = await fetch('/api/admin/guests', {
+                        headers: { 'Authorization': sessionStorage.getItem('adminToken') }
                     });
+                    const result = await res.json();
+                    if (result.success) {
+                        const body = document.getElementById('guestTableBody');
+                        body.innerHTML = '';
+                        
+                        if(result.data.length === 0) {
+                            body.innerHTML = `<tr><td colspan="4" class="p-8 text-center text-slate-400 text-sm">Belum ada tamu yang mengisi RSVP.</td></tr>`;
+                        }
+                        
+                        result.data.forEach(g => {
+                            let badgeColor = 'bg-blue-100 text-blue-700';
+                            if(g.attendance.toLowerCase().includes('tidak')) badgeColor = 'bg-rose-100 text-rose-700';
+                            if(g.attendance.toLowerCase().includes('ragu') || g.attendance.toLowerCase().includes('mungkin')) badgeColor = 'bg-amber-100 text-amber-700';
+
+                            body.innerHTML += `
+                                <tr class="text-sm hover:bg-slate-50 transition-colors group">
+                                    <td class="p-4 font-semibold text-slate-800">${g.name}</td>
+                                    <td class="p-4">
+                                        <span class="px-3 py-1 rounded-full text-xs font-bold ${badgeColor}">${g.attendance}</span>
+                                    </td>
+                                    <td class="p-4 text-slate-600 italic group-hover:text-slate-800 transition-colors">"${g.message}"</td>
+                                    <td class="p-4 text-center">
+                                        <button onclick="hapusTamu('${g._id}')" class="text-rose-400 hover:text-white hover:bg-rose-500 p-1.5 rounded-lg transition-all" title="Hapus Data">
+                                            <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                        </button>
+                                    </td>
+                                </tr>`;
+                        });
+                    }
+                } catch(e) { console.log(e); }
+            }
+
+            // 5. Fungsi Eksekusi Hapus Tamu
+            window.hapusTamu = async function(id) {
+                if(confirm('Yakin nih Bang mau hapus data tamu ini? Data akan hilang permanen lho.')) {
+                    try {
+                        const res = await fetch(`/api/admin/guests/${id}`, {
+                            method: 'DELETE',
+                            headers: { 'Authorization': sessionStorage.getItem('adminToken') }
+                        });
+                        const result = await res.json();
+                        
+                        if(result.success) { loadDataTamu(); } 
+                        else { alert('Gagal menghapus data: ' + result.error); }
+                    } catch (error) { alert('Terjadi kesalahan saat menghapus data.'); }
                 }
             }
 
-            // Tampilkan Data Config
+            // 6. Tampilkan Data Config ke Form
             async function loadConfigAwal() {
-                const res = await fetch('/api/wedding-info');
-                const result = await res.json();
-                if (result.success) {
-                    const d = result.data;
-                    document.getElementById('hero').value = d.urlFotoHero || '';
-                    document.getElementById('ortuPria').value = d.ortuPria || '';
-                    document.getElementById('urlFotoPria').value = d.urlFotoPria || '';
-                    document.getElementById('igPria').value = d.igPria || '';
-                    document.getElementById('ortuWanita').value = d.ortuWanita || '';
-                    document.getElementById('urlFotoWanita').value = d.urlFotoWanita || '';
-                    document.getElementById('igWanita').value = d.igWanita || '';
-                    document.getElementById('pria').value = d.mempelaiPria || '';
-                    document.getElementById('wanita').value = d.mempelaiWanita || '';
-                    document.getElementById('tgl').value = d.tanggalAcara || '';
-                    document.getElementById('akd').value = d.jamAkad || '';
-                    document.getElementById('altAkd').value = d.alamatAkad || '';
-                    document.getElementById('altRsp').value = d.alamatResepsi || '';
-                    document.getElementById('bnk').value = d.namaBank || '';
-                    document.getElementById('rek').value = d.noRekening || '';
-                    document.getElementById('an').value = d.atasNamaRekening || '';
-                    
-                    if (d.urlFotoGaleri) {
-                        document.getElementById('galeri1').value = d.urlFotoGaleri[0] || '';
-                        document.getElementById('galeri2').value = d.urlFotoGaleri[1] || '';
-                        document.getElementById('galeri3').value = d.urlFotoGaleri[2] || '';
-                        if (document.getElementById('galeri4')) document.getElementById('galeri4').value = d.urlFotoGaleri[3] || '';
-                        if (document.getElementById('galeri5')) document.getElementById('galeri5').value = d.urlFotoGaleri[4] || '';
-                        if (document.getElementById('galeri6')) document.getElementById('galeri6').value = d.urlFotoGaleri[5] || '';
-                    }
+                try {
+                    const res = await fetch('/api/wedding-info');
+                    const result = await res.json();
+                    if (result.success && result.data) {
+                        const d = result.data;
+                        document.getElementById('hero').value = d.urlFotoHero || '';
+                        document.getElementById('ortuPria').value = d.ortuPria || '';
+                        document.getElementById('urlFotoPria').value = d.urlFotoPria || '';
+                        document.getElementById('igPria').value = d.igPria || '';
+                        document.getElementById('ortuWanita').value = d.ortuWanita || '';
+                        document.getElementById('urlFotoWanita').value = d.urlFotoWanita || '';
+                        document.getElementById('igWanita').value = d.igWanita || '';
+                        document.getElementById('pria').value = d.mempelaiPria || '';
+                        document.getElementById('wanita').value = d.mempelaiWanita || '';
+                        document.getElementById('tgl').value = d.tanggalAcara || '';
+                        document.getElementById('akd').value = d.jamAkad || '';
+                        document.getElementById('altAkd').value = d.alamatAkad || '';
+                        document.getElementById('altRsp').value = d.alamatResepsi || '';
+                        document.getElementById('bnk').value = d.namaBank || '';
+                        document.getElementById('rek').value = d.noRekening || '';
+                        document.getElementById('an').value = d.atasNamaRekening || '';
+                        
+                        if (d.urlFotoGaleri) {
+                            document.getElementById('galeri1').value = d.urlFotoGaleri[0] || '';
+                            document.getElementById('galeri2').value = d.urlFotoGaleri[1] || '';
+                            document.getElementById('galeri3').value = d.urlFotoGaleri[2] || '';
+                            if (document.getElementById('galeri4')) document.getElementById('galeri4').value = d.urlFotoGaleri[3] || '';
+                            if (document.getElementById('galeri5')) document.getElementById('galeri5').value = d.urlFotoGaleri[4] || '';
+                            if (document.getElementById('galeri6')) document.getElementById('galeri6').value = d.urlFotoGaleri[5] || '';
+                        }
 
-                    if (d.ceritaCinta) {
-                        if (d.ceritaCinta[0]) {
-                            document.getElementById('story1-title').value = d.ceritaCinta[0].judul || '';
-                            document.getElementById('story1-date').value = d.ceritaCinta[0].tanggal || '';
-                            document.getElementById('story1-desc').value = d.ceritaCinta[0].deskripsi || '';
-                        }
-                        if (d.ceritaCinta[1]) {
-                            document.getElementById('story2-title').value = d.ceritaCinta[1].judul || '';
-                            document.getElementById('story2-date').value = d.ceritaCinta[1].tanggal || '';
-                            document.getElementById('story2-desc').value = d.ceritaCinta[1].deskripsi || '';
+                        if (d.ceritaCinta) {
+                            if (d.ceritaCinta[0]) {
+                                document.getElementById('story1-title').value = d.ceritaCinta[0].judul || '';
+                                document.getElementById('story1-date').value = d.ceritaCinta[0].tanggal || '';
+                                document.getElementById('story1-desc').value = d.ceritaCinta[0].deskripsi || '';
+                            }
+                            if (d.ceritaCinta[1]) {
+                                document.getElementById('story2-title').value = d.ceritaCinta[1].judul || '';
+                                document.getElementById('story2-date').value = d.ceritaCinta[1].tanggal || '';
+                                document.getElementById('story2-desc').value = d.ceritaCinta[1].deskripsi || '';
+                            }
                         }
                     }
-                }
+                } catch(e) { console.log(e); }
             }
 
-            // Simpan Data dari Kolom Form ke MongoDB (WAJIB KIRIM TOKEN)
-            document.getElementById('configForm').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                
-                // Ubah teks tombol pas loading
-                const btn = e.target.querySelector('button[type="submit"]');
-                const textAwal = btn.innerHTML;
-                btn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Menyimpan Data...`;
-                
-                const arrayGaleri = [
-                    document.getElementById('galeri1').value.trim(),
-                    document.getElementById('galeri2').value.trim(),
-                    document.getElementById('galeri3').value.trim(),
-                    document.getElementById('galeri4') ? document.getElementById('galeri4').value.trim() : '',
-                    document.getElementById('galeri5') ? document.getElementById('galeri5').value.trim() : '',
-                    document.getElementById('galeri6') ? document.getElementById('galeri6').value.trim() : ''
-                ].filter(url => url !== "");
-
-                const arrayCerita = [
-                    {
-                        judul: document.getElementById('story1-title').value.trim(),
-                        tanggal: document.getElementById('story1-date').value.trim(),
-                        deskripsi: document.getElementById('story1-desc').value.trim()
-                    },
-                    {
-                        judul: document.getElementById('story2-title').value.trim(),
-                        tanggal: document.getElementById('story2-date').value.trim(),
-                        deskripsi: document.getElementById('story2-desc').value.trim()
-                    }
-                ].filter(c => c.judul !== "");
-
-                const payload = {
-                    urlFotoHero: document.getElementById('hero').value,
-                    ortuPria: document.getElementById('ortuPria').value,
-                    urlFotoPria: document.getElementById('urlFotoPria').value,
-                    igPria: document.getElementById('igPria').value,
-                    ortuWanita: document.getElementById('ortuWanita').value,
-                    urlFotoWanita: document.getElementById('urlFotoWanita').value,
-                    igWanita: document.getElementById('igWanita').value,
-                    mempelaiPria: document.getElementById('pria').value,
-                    mempelaiWanita: document.getElementById('wanita').value,
-                    tanggalAcara: document.getElementById('tgl').value,
-                    jamAkad: document.getElementById('akd').value,
-                    alamatAkad: document.getElementById('altAkd').value,
-                    alamatResepsi: document.getElementById('altRsp').value,
-                    namaBank: document.getElementById('bnk').value,
-                    noRekening: document.getElementById('rek').value,
-                    atasNamaRekening: document.getElementById('an').value,
-                    urlFotoGaleri: arrayGaleri,
-                    ceritaCinta: arrayCerita
-                };
-
-                const res = await fetch('/api/admin/update-info', {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Authorization': sessionStorage.getItem('adminToken') // <--- KIRIM TOKEN
-                    },
-                    body: JSON.stringify(payload)
-                });
-                const data = await res.json();
-                if(data.success) { 
-                    alert('Berhasil! Data undangan sukses disimpan ke database.'); 
-                    window.location.reload(); 
-                } else {
-                    btn.innerHTML = textAwal;
-                    alert('Gagal menyimpan. Sesi Token mungkin kedaluwarsa, coba login ulang.');
-                }
-            });
-
-            // Fitur Sebar Link WhatsApp
-            document.getElementById('generateBtn').addEventListener('click', () => {
-                const tName = document.getElementById('targetName').value.trim();
-                const namaPria = document.getElementById('pria').value.trim() || "Raga";
-                const namaWanita = document.getElementById('wanita').value.trim() || "Maya";
-
-                if (!tName) return alert('Ketik nama tamu dulu, Bang!');
-                
-                const slugPasangan = `${namaPria.toLowerCase()}-${namaWanita.toLowerCase()}`.replace(/\s+/g, '');
-                const encodedName = encodeURIComponent(tName).replace(/%20/g, '+');
-                const inviteUrl = `${window.location.origin}/${slugPasangan}/?to=${encodedName}`;
-                
-                const textWA = `Kepada Yth. Bapak/Ibu/Saudara/i *${tName}*,\n\nTanpa mengurangi rasa hormat, kami bermaksud mengundang Anda untuk hadir di acara pernikahan kami.\n\nSilakan klik tautan berikut untuk membuka detail undangan:\n${inviteUrl}\n\nMerupakan suatu kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir dan memberikan doa restu.\n\nSalam hangat,\n*${namaPria} & ${namaWanita}*`;
-
-                navigator.clipboard.writeText(textWA).then(() => {
-                    alert(`✅ Mantap! Teks undangan untuk ${tName} berhasil disalin. Tinggal Paste di WA!`);
-                    document.getElementById('targetName').value = ''; 
-                }).catch(err => {
-                    console.error("Gagal copy: ", err);
-                    alert("Waduh, Browser memblokir copy otomatis. Coba ulangi klik tombolnya!");
-                });
-            });
-        });
-    // A. Trigger otomatis baca data username saat ini
+            // 7. Tarik Data Username Saat Ini ke Form
             async function loadAccountInfo() {
                 try {
                     const res = await fetch('/api/admin/credentials', {
@@ -486,51 +389,102 @@
                     if (result.success && document.getElementById('newUsername')) {
                         document.getElementById('newUsername').value = result.username;
                     }
-                } catch (error) { console.log(error); }
+                } catch (error) { console.log("Gagal memuat akun:", error); }
             }
 
-            // B. Eksekusi Hapus Tamu ke MongoDB
-            window.hapusTamu = async function(id) {
-                if(confirm('Yakin nih Bang mau hapus data tamu ini? Data akan hilang permanen lho.')) {
+            // 8. Simpan Config ke Database
+            if(document.getElementById('configForm')) {
+                document.getElementById('configForm').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const btn = e.target.querySelector('button[type="submit"]');
+                    const textAwal = btn.innerHTML;
+                    btn.innerHTML = `Menyimpan Data...`;
+                    
+                    const arrayGaleri = [
+                        document.getElementById('galeri1').value.trim(), document.getElementById('galeri2').value.trim(), document.getElementById('galeri3').value.trim(),
+                        document.getElementById('galeri4') ? document.getElementById('galeri4').value.trim() : '',
+                        document.getElementById('galeri5') ? document.getElementById('galeri5').value.trim() : '',
+                        document.getElementById('galeri6') ? document.getElementById('galeri6').value.trim() : ''
+                    ].filter(url => url !== "");
+
+                    const arrayCerita = [
+                        { judul: document.getElementById('story1-title').value.trim(), tanggal: document.getElementById('story1-date').value.trim(), deskripsi: document.getElementById('story1-desc').value.trim() },
+                        { judul: document.getElementById('story2-title').value.trim(), tanggal: document.getElementById('story2-date').value.trim(), deskripsi: document.getElementById('story2-desc').value.trim() }
+                    ].filter(c => c.judul !== "");
+
+                    const payload = {
+                        urlFotoHero: document.getElementById('hero').value, ortuPria: document.getElementById('ortuPria').value, urlFotoPria: document.getElementById('urlFotoPria').value, igPria: document.getElementById('igPria').value,
+                        ortuWanita: document.getElementById('ortuWanita').value, urlFotoWanita: document.getElementById('urlFotoWanita').value, igWanita: document.getElementById('igWanita').value,
+                        mempelaiPria: document.getElementById('pria').value, mempelaiWanita: document.getElementById('wanita').value, tanggalAcara: document.getElementById('tgl').value,
+                        jamAkad: document.getElementById('akd').value, alamatAkad: document.getElementById('altAkd').value, alamatResepsi: document.getElementById('altRsp').value,
+                        namaBank: document.getElementById('bnk').value, noRekening: document.getElementById('rek').value, atasNamaRekening: document.getElementById('an').value,
+                        urlFotoGaleri: arrayGaleri, ceritaCinta: arrayCerita
+                    };
+
                     try {
-                        const res = await fetch(`/api/admin/guests/${id}`, {
-                            method: 'DELETE',
-                            headers: { 'Authorization': sessionStorage.getItem('adminToken') }
+                        const res = await fetch('/api/admin/update-info', {
+                            method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': sessionStorage.getItem('adminToken') },
+                            body: JSON.stringify(payload)
+                        });
+                        const data = await res.json();
+                        if(data.success) { 
+                            alert('Berhasil! Data undangan sukses disimpan ke database.'); 
+                            window.location.reload(); 
+                        } else {
+                            btn.innerHTML = textAwal;
+                            alert('Gagal menyimpan. Sesi Token mungkin kedaluwarsa, coba login ulang.');
+                        }
+                    } catch(e) { btn.innerHTML = textAwal; alert('Error jaringan'); }
+                });
+            }
+
+            // 9. Eksekusi Simpan Perubahan Akun Baru
+            if(document.getElementById('accountForm')) {
+                document.getElementById('accountForm').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    if(!confirm('Yakin mau ganti akun? Setelah sukses kamu harus login ulang ya!')) return;
+
+                    const newUsername = document.getElementById('newUsername').value.trim();
+                    const newPassword = document.getElementById('newPassword').value.trim();
+
+                    try {
+                        const res = await fetch('/api/admin/change-credentials', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json', 'Authorization': sessionStorage.getItem('adminToken') },
+                            body: JSON.stringify({ newUsername, newPassword })
                         });
                         const result = await res.json();
-                        if(result.success) { loadDataTamu(); } 
-                        else { alert('Gagal menghapus data: ' + result.error); }
-                    } catch (error) { alert('Terjadi kesalahan saat menghapus data.'); }
-                }
+                        if(result.success) {
+                            alert('Akun berhasil diubah! Silakan login kembali dengan Password baru.');
+                            document.getElementById('logoutBtn').click(); 
+                        } else { alert('Gagal mengubah akun.'); }
+                    } catch (error) { alert('Error sistem saat mengubah akun.'); }
+                });
             }
 
-            // C. Eksekusi Simpan Perubahan Akun Baru
-            document.getElementById('accountForm').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                if(!confirm('Yakin mau ganti akun? Setelah sukses kamu harus login ulang ya!')) return;
+            // 10. Fitur Sebar Link WhatsApp
+            if(document.getElementById('generateBtn')) {
+                document.getElementById('generateBtn').addEventListener('click', () => {
+                    const tName = document.getElementById('targetName').value.trim();
+                    const namaPria = document.getElementById('pria').value.trim() || "Raga";
+                    const namaWanita = document.getElementById('wanita').value.trim() || "Maya";
 
-                const newUsername = document.getElementById('newUsername').value.trim();
-                const newPassword = document.getElementById('newPassword').value.trim();
+                    if (!tName) return alert('Ketik nama tamu dulu, Bang!');
+                    
+                    const slugPasangan = `${namaPria.toLowerCase()}-${namaWanita.toLowerCase()}`.replace(/\s+/g, '');
+                    const encodedName = encodeURIComponent(tName).replace(/%20/g, '+');
+                    const inviteUrl = `${window.location.origin}/${slugPasangan}/?to=${encodedName}`;
+                    
+                    const textWA = `Kepada Yth. Bapak/Ibu/Saudara/i *${tName}*,\n\nTanpa mengurangi rasa hormat, kami bermaksud mengundang Anda untuk hadir di acara pernikahan kami.\n\nSilakan klik tautan berikut untuk membuka detail undangan:\n${inviteUrl}\n\nMerupakan suatu kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir dan memberikan doa restu.\n\nSalam hangat,\n*${namaPria} & ${namaWanita}*`;
 
-                try {
-                    const res = await fetch('/api/admin/change-credentials', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', 'Authorization': sessionStorage.getItem('adminToken') },
-                        body: JSON.stringify({ newUsername, newPassword })
-                    });
-                    const result = await res.json();
-                    if(result.success) {
-                        alert('Akun berhasil diubah! Silakan login kembali dengan Password baru.');
-                        document.getElementById('logoutBtn').click(); 
-                    } else { alert('Gagal mengubah akun.'); }
-                } catch (error) { alert('Error sistem saat mengubah akun.'); }
-            });
+                    navigator.clipboard.writeText(textWA).then(() => {
+                        alert(`✅ Mantap! Teks undangan untuk ${tName} berhasil disalin. Tinggal Paste di WA!`);
+                        document.getElementById('targetName').value = ''; 
+                    }).catch(err => { alert("Waduh, Browser memblokir copy otomatis. Coba ulangi klik tombolnya!"); });
+                });
+            }
 
-            // Tambahkan pemanggil akun ini di dalam fungsi showDashboard() milik Abang di atas ya!
-            // Tulis saja: loadAccountInfo(); tepat di bawah loadConfigAwal();
-
-        }); // 👈 Ini batas akhir penutup DOMContentLoaded asli bawaan Abang
-    </script>
+        }); 
     </script>
 </body>
 </html>
