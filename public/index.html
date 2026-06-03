@@ -237,8 +237,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
     <!-- 👇👇 NARO KODENYA DI SINI BANG 👇👇 -->
-<!-- Script untuk mengambil data dari Database (Versi Plus Background) -->
-    <script>
+<script>
         document.addEventListener("DOMContentLoaded", async () => {
             try {
                 // Mengambil data dari backend
@@ -257,14 +256,18 @@
                     if (document.getElementById('nama-pria')) document.getElementById('nama-pria').innerText = d.mempelaiPria || '-';
                     if (document.getElementById('nama-wanita')) document.getElementById('nama-wanita').innerText = d.mempelaiWanita || '-';
 
-                    // 3. Ganti Background Dinamis dari Admin
+                    // 3. Ganti Background Dinamis Tepat Sasaran
                     if (d.urlFotoHero) {
-                        // Mencari elemen bungkus terluar (biasanya pakai tag section, class hero, atau id hero)
-                        const heroSection = document.getElementById('hero') || document.querySelector('.hero') || document.querySelector('section');
-                        if (heroSection) {
-                            heroSection.style.backgroundImage = `url('${d.urlFotoHero}')`;
-                            heroSection.style.backgroundSize = 'cover';
-                            heroSection.style.backgroundPosition = 'center';
+                        // A. Ganti foto di halaman amplop paling depan (biar tetap ada efek gelap elegan)
+                        const coverPage = document.getElementById('cover-page');
+                        if (coverPage) {
+                            coverPage.style.setProperty('background-image', `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('${d.urlFotoHero}')`, 'important');
+                        }
+
+                        // B. Ganti foto di halaman utama (pas amplop dibuka)
+                        const heroBg = document.getElementById('hero-bg');
+                        if (heroBg) {
+                            heroBg.style.setProperty('background-image', `url('${d.urlFotoHero}')`, 'important');
                         }
                     }
                 }
