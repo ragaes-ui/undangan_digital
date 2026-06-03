@@ -206,6 +206,28 @@
                     </div>
                 </div>
             </div>
+            <div class="bg-gradient-to-br from-rose-50 to-orange-50 p-6 md:p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-rose-100 mt-6">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2 bg-rose-100 text-rose-600 rounded-lg">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    </div>
+                    <h2 class="text-xl font-bold text-rose-900">Pengaturan Akun</h2>
+                </div>
+                
+                <form id="accountForm" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-rose-700 uppercase tracking-wider mb-2">Username Baru</label>
+                        <input type="text" id="newUsername" placeholder="Masukkan username baru..." required class="w-full px-4 py-3 bg-white border border-rose-200 rounded-xl outline-none focus:border-rose-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-rose-700 uppercase tracking-wider mb-2">Password Baru</label>
+                        <input type="text" id="newPassword" placeholder="Masukkan password baru..." required class="w-full px-4 py-3 bg-white border border-rose-200 rounded-xl outline-none focus:border-rose-500">
+                    </div>
+                    <button type="submit" class="w-full bg-rose-600 text-white py-3.5 rounded-xl font-bold hover:bg-rose-700 transition-all shadow-lg shadow-rose-500/30">
+                        Simpan & Login Ulang
+                    </button>
+                </form>
+            </div>
 
             <!-- KOLOM KANAN: TABEL RSVP -->
             <div class="lg:col-span-2">
@@ -317,8 +339,7 @@
                         body.innerHTML = `<tr><td colspan="3" class="p-8 text-center text-slate-400 text-sm">Belum ada tamu yang mengisi RSVP.</td></tr>`;
                     }
                     
-                    result.data.forEach(g => {
-                        // Tambahkan styling warna badge kehadiran
+result.data.forEach(g => {
                         let badgeColor = 'bg-blue-100 text-blue-700';
                         if(g.attendance.toLowerCase().includes('tidak')) badgeColor = 'bg-rose-100 text-rose-700';
                         if(g.attendance.toLowerCase().includes('ragu') || g.attendance.toLowerCase().includes('mungkin')) badgeColor = 'bg-amber-100 text-amber-700';
@@ -330,7 +351,13 @@
                                     <span class="px-3 py-1 rounded-full text-xs font-bold ${badgeColor}">${g.attendance}</span>
                                 </td>
                                 <td class="p-4 text-slate-600 italic group-hover:text-slate-800 transition-colors">"${g.message}"</td>
-                            </tr>`;
+                                
+                                <td class="p-4 text-center">
+                                    <button onclick="hapusTamu('${g._id}')" class="text-rose-400 hover:text-white hover:bg-rose-500 p-1.5 rounded-lg transition-all" title="Hapus Data">
+                                        Hapus
+                                    </button>
+                                </td>
+                                </tr>`;
                     });
                 }
             }
@@ -474,6 +501,61 @@
                     alert("Waduh, Browser memblokir copy otomatis. Coba ulangi klik tombolnya!");
                 });
             });
+            // SUNTIKAN 3: LOGIKA JAVASCRIPT
+
+            // A. Fungsi Hapus Data di Tabel
+            window.hapusTamu = async function(id) {
+                if(confirm('Yakin nih Bang mau hapus data tamu ini? Data akan hilang permanen lho.')) {
+                    try {
+                        const res = await fetch(`/api/admin/guests/${id}`, {
+                            method: 'DELETE',
+                            headers: { 'Authorization': sessionStorage.getItem('adminToken') }
+                        });
+                        const result = await res.json();
+                        if(result.success) { loadDataTamu(); } 
+                        else { alert('Gagal menghapus data: ' + result.error); }
+                    } catch (error) { alert('Terjadi kesalahan saat menghapus data.'); }
+                }
+            }
+
+            // B. Fungsi Tarik Akun Saat Ini ke Form
+            async function loadAccountInfo() {
+                try {
+                    const res = await fetch('/api/admin/credentials', {
+                        headers: { 'Authorization': sessionStorage.getItem('adminToken') }
+                    });
+                    const result = await res.json();
+                    if (result.success && document.getElementById('newUsername')) {
+                        document.getElementById('newUsername').value = result.username;
+                    }
+                } catch (error) { console.log(error); }
+            }
+            loadAccountInfo(); // Auto eksekusi saat admin dibuka
+
+            // C. Fungsi Simpan Username & Password Baru
+            if(document.getElementById('accountForm')){
+                document.getElementById('accountForm').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    if(!confirm('Yakin mau ganti akun? Setelah sukses kamu harus login ulang ya!')) return;
+
+                    const newUsername = document.getElementById('newUsername').value.trim();
+                    const newPassword = document.getElementById('newPassword').value.trim();
+
+                    try {
+                        const res = await fetch('/api/admin/change-credentials', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json', 'Authorization': sessionStorage.getItem('adminToken') },
+                            body: JSON.stringify({ newUsername, newPassword })
+                        });
+                        const result = await res.json();
+                        if(result.success) {
+                            alert('Akun berhasil diubah! Silakan login kembali dengan Password baru.');
+                            document.getElementById('logoutBtn').click(); // Auto Logout
+                        } else { alert('Gagal mengubah akun.'); }
+                    } catch (error) { alert('Error sistem saat mengubah akun.'); }
+                });
+            }
+            // AKHIR SUNTIKAN 3
         });
     </script>
 </body>
