@@ -6,7 +6,6 @@
     <title>Dashboard Admin | Undangan Digital</title>
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Tambahan Font Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -24,7 +23,6 @@
 </head>
 <body class="bg-slate-50 min-h-screen text-slate-800 selection:bg-blue-200">
 
-    <!-- LOGIN PANEL (Di-upgrade dengan efek gradasi dan glass) -->
     <div id="login-panel" class="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 flex items-center justify-center z-50 p-4">
         <div class="bg-white/95 backdrop-blur-md p-10 rounded-[2rem] shadow-2xl w-full max-w-md border border-white/20 transform transition-all">
             <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-inner">
@@ -49,9 +47,7 @@
         </div>
     </div>
 
-    <!-- DASHBOARD PANEL -->
     <div id="dashboard-panel" class="hidden">
-        <!-- Navbar Mewah -->
         <nav class="bg-white/80 backdrop-blur-lg border-b border-slate-200 sticky top-0 z-40 px-6 py-4">
             <div class="max-w-7xl mx-auto flex justify-between items-center">
                 <div class="flex items-center gap-3">
@@ -71,10 +67,8 @@
         </nav>
 
         <div class="max-w-7xl mx-auto p-4 md:p-6 grid lg:grid-cols-3 gap-6 md:gap-8 mt-4">
-            <!-- KOLOM KIRI: FORM PENGATURAN -->
             <div class="lg:col-span-1 space-y-6">
                 
-                <!-- Kotak Form Utama -->
                 <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
                     <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
                         <div class="p-2 bg-blue-50 text-blue-600 rounded-lg">
@@ -85,20 +79,17 @@
                     
                     <form id="configForm" class="space-y-6 text-sm">
                         
-                        <!-- Section: Perjalanan Cinta -->
                         <div class="space-y-3">
                             <label class="flex items-center gap-2 text-xs font-bold text-indigo-600 uppercase tracking-widest mb-2 bg-indigo-50 px-3 py-1.5 rounded-md inline-block w-fit">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                                 Perjalanan Cinta
                             </label>
-                            <!-- Cerita 1 -->
                             <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 space-y-3 hover:border-indigo-200 transition-colors">
                                 <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Kisah 1 (Awal Bertemu)</p>
                                 <input type="text" id="story1-title" placeholder="Judul Kisah" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all">
                                 <input type="text" id="story1-date" placeholder="Waktu (Misal: Jan 2024)" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all">
                                 <textarea id="story1-desc" placeholder="Tulis cerita singkat di sini..." rows="2" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all"></textarea>
                             </div>
-                            <!-- Cerita 2 -->
                             <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 space-y-3 hover:border-indigo-200 transition-colors">
                                 <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Kisah 2 (Lamaran)</p>
                                 <input type="text" id="story2-title" placeholder="Judul Kisah" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all">
@@ -107,7 +98,6 @@
                             </div>
                         </div>
 
-                        <!-- Section: Data Mempelai -->
                         <div class="space-y-4 pt-4 border-t border-slate-100">
                             <label class="flex items-center gap-2 text-xs font-bold text-blue-600 uppercase tracking-widest bg-blue-50 px-3 py-1.5 rounded-md inline-block w-fit">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
@@ -132,7 +122,6 @@
                             </div>
                         </div>
 
-                        <!-- Section: Detail Acara -->
                         <div class="space-y-3 pt-4 border-t border-slate-100">
                             <label class="flex items-center gap-2 text-xs font-bold text-amber-600 uppercase tracking-widest bg-amber-50 px-3 py-1.5 rounded-md inline-block w-fit mb-2">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
@@ -146,7 +135,6 @@
                             <input type="text" id="altRsp" placeholder="Alamat Lengkap & Tempat Resepsi" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all">
                         </div>
 
-                        <!-- Section: Keuangan -->
                         <div class="space-y-3 pt-4 border-t border-slate-100">
                             <label class="flex items-center gap-2 text-xs font-bold text-emerald-600 uppercase tracking-widest bg-emerald-50 px-3 py-1.5 rounded-md inline-block w-fit mb-2">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
@@ -157,7 +145,6 @@
                             <input type="text" id="an" placeholder="Atas Nama (A/n Raga)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all">
                         </div>
 
-                        <!-- Section: Foto & Galeri -->
                         <div class="space-y-3 pt-4 border-t border-slate-100">
                             <label class="flex items-center gap-2 text-xs font-bold text-purple-600 uppercase tracking-widest bg-purple-50 px-3 py-1.5 rounded-md inline-block w-fit mb-2">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
@@ -175,7 +162,6 @@
                             </div>
                         </div>
 
-                        <!-- Tombol Submit -->
                         <div class="pt-6">
                             <button type="submit" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 rounded-xl font-bold text-base shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all duration-200">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
@@ -185,7 +171,6 @@
                     </form>
                 </div>
 
-                <!-- Kotak Generate Link WA -->
                 <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-6 md:p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-emerald-100">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="p-2 bg-emerald-100 text-emerald-600 rounded-lg">
@@ -207,7 +192,6 @@
                 </div>
             </div>
 
-            <!-- KOLOM KANAN: TABEL RSVP -->
             <div class="lg:col-span-2">
                 <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 h-fit sticky top-24">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
@@ -226,14 +210,13 @@
                                 <tr class="bg-slate-50 text-xs text-slate-500 uppercase tracking-wider">
                                     <th class="p-4 font-bold border-b border-slate-200">Nama Tamu</th>
                                     <th class="p-4 font-bold border-b border-slate-200">Status</th>
-                                    <th class="p-4 font-bold border-b border-slate-200 w-1/2">Ucapan & Doa</th>
+                                    <th class="p-4 font-bold border-b border-slate-200 w-2/5">Ucapan & Doa</th>
+                                    <th class="p-4 font-bold border-b border-slate-200 text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody id="guestTableBody" class="divide-y divide-slate-100">
-                                <!-- Data Tamu Muncul di Sini -->
-                                <!-- Baris Loading Default -->
                                 <tr>
-                                    <td colspan="3" class="p-8 text-center text-slate-400 text-sm italic">
+                                    <td colspan="4" class="p-8 text-center text-slate-400 text-sm italic">
                                         <svg class="animate-spin w-6 h-6 mx-auto mb-2 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                                         Memuat data tamu...
                                     </td>
@@ -246,7 +229,6 @@
         </div>
     </div>
 
-<!-- KODE SCRIPT JAVA SCRIPT DI BAWAH INI TIDAK ADA YANG DIUBAH (SAMA PERSIS DENGAN PUNYA ABANG) -->
 <script>
         document.addEventListener("DOMContentLoaded", () => {
             const loginPanel = document.getElementById('login-panel');
@@ -314,7 +296,7 @@
                     body.innerHTML = '';
                     
                     if(result.data.length === 0) {
-                        body.innerHTML = `<tr><td colspan="3" class="p-8 text-center text-slate-400 text-sm">Belum ada tamu yang mengisi RSVP.</td></tr>`;
+                        body.innerHTML = `<tr><td colspan="4" class="p-8 text-center text-slate-400 text-sm">Belum ada tamu yang mengisi RSVP.</td></tr>`;
                     }
                     
                     result.data.forEach(g => {
@@ -330,8 +312,34 @@
                                     <span class="px-3 py-1 rounded-full text-xs font-bold ${badgeColor}">${g.attendance}</span>
                                 </td>
                                 <td class="p-4 text-slate-600 italic group-hover:text-slate-800 transition-colors">"${g.message}"</td>
+                                <td class="p-4 text-center">
+                                    <button onclick="hapusTamu('${g._id}')" class="text-rose-400 hover:text-white hover:bg-rose-500 p-1.5 rounded-lg transition-all" title="Hapus Data">
+                                        <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                    </button>
+                                </td>
                             </tr>`;
                     });
+                }
+            }
+
+            // TAMBAHAN: Fungsi untuk menghapus data RSVP
+            window.hapusTamu = async function(id) {
+                if(confirm('Yakin nih Bang mau hapus data tamu ini? Data akan hilang permanen lho.')) {
+                    try {
+                        const res = await fetch(`/api/admin/guests/${id}`, {
+                            method: 'DELETE',
+                            headers: { 'Authorization': sessionStorage.getItem('adminToken') }
+                        });
+                        const result = await res.json();
+                        
+                        if(result.success) {
+                            loadDataTamu(); // Reload tabel otomatis kalau berhasil
+                        } else {
+                            alert('Gagal menghapus data: ' + result.error);
+                        }
+                    } catch (error) {
+                        alert('Terjadi kesalahan saat menghapus data.');
+                    }
                 }
             }
 
@@ -430,6 +438,7 @@
                     namaBank: document.getElementById('bnk').value,
                     noRekening: document.getElementById('rek').value,
                     atasNamaRekening: document.getElementById('an').value,
+                    urlFotoHero: document.getElementById('hero').value,
                     urlFotoGaleri: arrayGaleri,
                     ceritaCinta: arrayCerita
                 };
