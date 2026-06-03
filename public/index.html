@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Pernikahan Premium</title>
+    <title>Undangan Pernikahan</title>
     <base href="/">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -236,5 +236,27 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
+    <!-- 👇👇 NARO KODENYA DI SINI BANG 👇👇 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            try {
+                const res = await fetch('/api/wedding-info');
+                const result = await res.json();
+
+                if (result.success && result.data) {
+                    const d = result.data;
+                    const namaPasangan = `${d.mempelaiPria || 'Nama'} & ${d.mempelaiWanita || 'Pasangan'}`;
+
+                    if (document.getElementById('cover-nama')) document.getElementById('cover-nama').innerText = namaPasangan;
+                    if (document.getElementById('hero-nama')) document.getElementById('hero-nama').innerText = namaPasangan;
+                    if (document.getElementById('nama-pria')) document.getElementById('nama-pria').innerText = d.mempelaiPria || '-';
+                    if (document.getElementById('nama-wanita')) document.getElementById('nama-wanita').innerText = d.mempelaiWanita || '-';
+                }
+            } catch (error) {
+                console.error("Gagal mengambil data dari database:", error);
+            }
+        });
+    </script>
+    <!-- 👆👆 NARO KODENYA DI SINI BANG 👆👆 -->
 </body>
 </html>
