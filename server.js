@@ -132,5 +132,10 @@ app.post('/api/admin/update-info', isAdmin, async (req, res) => {
     }
 });
 
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Server ON di port ${PORT}`));
+// Kalau jalan di laptop lokal pakai PORT, kalau di Vercel pakai export
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = 3000;
+    app.listen(PORT, () => console.log(`Server ON di port ${PORT}`));
+}
+module.exports = app;
+
