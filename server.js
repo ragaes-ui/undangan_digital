@@ -5,6 +5,13 @@ const cors = require('cors');
 const Guest = require('./models/Guest');
 const WeddingConfig = require('./models/WeddingConfig');
 
+// MENGUBAH AKUN DARI KODE MATI MENJADI DATABASE
+const adminSchema = new mongoose.Schema({
+    username: { type: String, default: 'adminnikah' },
+    password: { type: String, default: 'rahasiabanget' }
+});
+const AdminUser = mongoose.models.AdminUser || mongoose.model('AdminUser', adminSchema);
+
 const app = express();
 app.use(cors({ origin: true }));
 app.use(express.json());
@@ -13,7 +20,6 @@ app.use(express.static('public'));
 
 const mongoURI = 'mongodb+srv://undangan_digital:raga151204@cluster0.rutgg.mongodb.net/undangan_digital?retryWrites=true&w=majority';
 
-// 1. JURUS ANTI-PUTUS (Mengecek koneksi setiap kali ada request)
 const connectDB = async () => {
     if (mongoose.connection.readyState >= 1) return;
     try {
@@ -36,7 +42,7 @@ const isAdmin = (req, res, next) => {
 // ==================== API TAMU / UNDANGAN ====================
 app.get('/api/wedding-info', async (req, res) => {
     try {
-        await connectDB(); // Bangunkan DB
+        await connectDB(); 
         let config = await WeddingConfig.findOne();
         if (!config) {
             config = new WeddingConfig();
@@ -50,7 +56,7 @@ app.get('/api/wedding-info', async (req, res) => {
 
 app.post('/api/rsvp', async (req, res) => {
     try {
-        await connectDB(); // Bangunkan DB
+        await connectDB(); 
         const { name, attendance, message } = req.body;
         const newGuest = new Guest({ name, attendance, message });
         await newGuest.save();
@@ -61,44 +67,87 @@ app.post('/api/rsvp', async (req, res) => {
 });
 
 // ==================== API ADMIN ====================
-app.post('/api/admin/login', (req, res) => {
-    const { username, password } = req.body;
-    
-    if (username === 'adminnikah' && password === 'rahasiabanget') {
-        res.json({ success: true, token: 'TOKEN_RAHASIA_RAGA_2026' });
-    } else {
-        res.status(400).json({ success: false, message: 'Kredensial salah' });
+app.post('/api/admin/login', async (req, res) => {
+    try {
+        await connectDB();
+        const { username, password } = req.body;
+        
+        let admin = await AdminUser.findOne();
+        if (!admin) {
+            admin = new AdminUser();
+            await admin.save();
+        }
+        
+        if (username === admin.username && password === admin.password) {
+            res.json({ success: true, token: 'TOKEN_RAHASIA_RAGA_2026' });
+        } else {
+            res.status(400).json({ success: false, message: 'Kredensial salah' });
+        }
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// Mengambil Username Saat Ini
+app.get('/api/admin/credentials', isAdmin, async (req, res) => {
+    try {
+        await connectDB();
+        let admin = await AdminUser.findOne();
+        if (!admin) admin = new AdminUser();
+        res.json({ success: true, username: admin.username });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// Mengubah Username & Password
+app.post('/api/admin/change-credentials', isAdmin, async (req, res) => {
+    try {
+        await connectDB();
+        const { newUsername, newPassword } = req.body;
+        
+        let admin = await AdminUser.findOne();
+        if (!admin) admin = new AdminUser();
+        
+        if (newUsername) admin.username = newUsername;
+        if (newPassword) admin.password = newPassword;
+        
+        await admin.save();
+        res.json({ success: true, message: 'Kredensial berhasil diubah' });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
     }
 });
 
 app.get('/api/admin/guests', isAdmin, async (req, res) => {
     try {
-        await connectDB(); // Bangunkan DB
+        await connectDB(); 
         const guests = await Guest.find().sort({ createdAt: -1 });
         res.json({ success: true, data: guests });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
 });
+
 app.delete('/api/admin/guests/:id', isAdmin, async (req, res) => {
     try {
-        await connectDB(); // Bangunkan DB
+        await connectDB(); 
         await Guest.findByIdAndDelete(req.params.id);
         res.json({ success: true, message: 'Data tamu berhasil dihapus' });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
 });
+
 app.post('/api/admin/update-info', isAdmin, async (req, res) => {
     try {
-        await connectDB(); // Bangunkan DB sebelum menyimpan data!
-
+        await connectDB(); 
         const {
             mempelaiPria, mempelaiWanita,
             urlFotoPria, urlFotoWanita, 
             ortuPria, ortuWanita, igPria, igWanita,
-            tanggalAcara, jamAkad, alamatAkad, mapsAkad,
-            jamResepsi, alamatResepsi, mapsResepsi,
+            tanggalAcara, jamAkad, alamatAkad,
+            jamResepsi, alamatResepsi,
             namaBank, noRekening, atasNamaRekening,
             urlFotoHero, urlFotoGaleri, ceritaCinta
         } = req.body;
@@ -114,8 +163,8 @@ app.post('/api/admin/update-info', isAdmin, async (req, res) => {
             mempelaiPria, mempelaiWanita,
             urlFotoPria, urlFotoWanita, 
             ortuPria, ortuWanita, igPria, igWanita,
-            tanggalAcara, jamAkad, alamatAkad, mapsAkad,
-            jamResepsi, alamatResepsi, mapsResepsi,
+            tanggalAcara, jamAkad, alamatAkad,
+            jamResepsi, alamatResepsi,
             namaBank, noRekening, atasNamaRekening,
             urlFotoHero, 
             urlFotoGaleri: galeriArray,
@@ -129,7 +178,6 @@ app.post('/api/admin/update-info', isAdmin, async (req, res) => {
     }
 });
 
-// 2. PENANGKAP ERROR EXPRESS (Mencegah tampilan layar putih / teks polos)
 app.use((err, req, res, next) => {
     console.error("Express System Error:", err.stack);
     res.status(500).json({ success: false, error: "Sistem Error: " + err.message });
