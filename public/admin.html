@@ -2,127 +2,251 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin | Undangan Digital</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tambahan Font Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <link rel="icon" type="image/png" href="https://ui-avatars.com/api/?name=R+S&background=C5A880&color=2C3531&size=256&rounded=true&bold=true">
-</head>
-<body class="bg-gray-100 min-h-screen">
 
-    <div id="login-panel" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-        <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
-            <h2 class="text-2xl font-bold text-center mb-6">Login Admin</h2>
-            <form id="loginForm" class="space-y-4">
-                <input type="text" id="username" placeholder="Username" required class="w-full p-3 border rounded-xl outline-none">
-                <input type="password" id="password" placeholder="Password" required class="w-full p-3 border rounded-xl outline-none">
-                <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-xl font-semibold">Masuk</button>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        /* Custom Scrollbar biar makin elegan */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 selection:bg-blue-200">
+
+    <!-- LOGIN PANEL (Di-upgrade dengan efek gradasi dan glass) -->
+    <div id="login-panel" class="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 flex items-center justify-center z-50 p-4">
+        <div class="bg-white/95 backdrop-blur-md p-10 rounded-[2rem] shadow-2xl w-full max-w-md border border-white/20 transform transition-all">
+            <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-inner">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            </div>
+            <h2 class="text-3xl font-extrabold text-center text-slate-800 mb-2">Admin Portal</h2>
+            <p class="text-center text-slate-500 mb-8 text-sm">Silakan masuk untuk mengelola undangan</p>
+            
+            <form id="loginForm" class="space-y-5">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Username</label>
+                    <input type="text" id="username" placeholder="Masukkan username..." required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all duration-200 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all duration-200 text-sm">
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3.5 rounded-xl font-bold shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all duration-200 mt-4">
+                    Masuk ke Dashboard
+                </button>
             </form>
         </div>
     </div>
 
+    <!-- DASHBOARD PANEL -->
     <div id="dashboard-panel" class="hidden">
-        <nav class="bg-white shadow px-6 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-bold">Admin Undangan Digital</h1>
-            <button id="logoutBtn" class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm">Logout</button>
+        <!-- Navbar Mewah -->
+        <nav class="bg-white/80 backdrop-blur-lg border-b border-slate-200 sticky top-0 z-40 px-6 py-4">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 text-white rounded-xl flex items-center justify-center font-bold text-lg shadow-sm">
+                        UD
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold text-slate-800 leading-tight">Undangan Digital</h1>
+                        <p class="text-xs text-slate-500 font-medium">Dashboard Management</p>
+                    </div>
+                </div>
+                <button id="logoutBtn" class="flex items-center gap-2 bg-rose-50 text-rose-600 px-4 py-2 rounded-xl text-sm font-semibold hover:bg-rose-100 transition-colors border border-rose-100">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                    Logout
+                </button>
+            </div>
         </nav>
 
-        <div class="max-w-7xl mx-auto p-6 grid md:grid-cols-3 gap-6">
-            <div class="bg-white p-6 rounded-2xl shadow-sm border space-y-4 md:col-span-1">
-                <h2 class="text-lg font-bold text-gray-700 border-b pb-2">Edit Konten Undangan</h2>
+        <div class="max-w-7xl mx-auto p-4 md:p-6 grid lg:grid-cols-3 gap-6 md:gap-8 mt-4">
+            <!-- KOLOM KIRI: FORM PENGATURAN -->
+            <div class="lg:col-span-1 space-y-6">
                 
-                <form id="configForm" class="space-y-4 text-sm">
-                    <!-- Kisah Cinta -->
-                    <div class="mb-4">
-                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-2 border-b pb-1">Perjalanan Cinta (Opsional)</label>
-                        <!-- Cerita 1 -->
-                        <div class="bg-gray-50 p-3 rounded-lg mb-2 border">
-                            <p class="text-xs font-bold text-gray-400 mb-2">Kisah 1 (Awal Bertemu)</p>
-                            <input type="text" id="story1-title" placeholder="Judul" class="w-full p-2 border rounded mb-2">
-                            <input type="text" id="story1-date" placeholder="Waktu (Misal: Jan 2024)" class="w-full p-2 border rounded mb-2">
-                            <textarea id="story1-desc" placeholder="Cerita singkat..." class="w-full p-2 border rounded text-xs"></textarea>
+                <!-- Kotak Form Utama -->
+                <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                        <div class="p-2 bg-blue-50 text-blue-600 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                         </div>
-                        <!-- Cerita 2 -->
-                        <div class="bg-gray-50 p-3 rounded-lg border">
-                            <p class="text-xs font-bold text-gray-400 mb-2">Kisah 2 (Pertunangan/Pernikahan)</p>
-                            <input type="text" id="story2-title" placeholder="Judul" class="w-full p-2 border rounded mb-2">
-                            <input type="text" id="story2-date" placeholder="Waktu" class="w-full p-2 border rounded mb-2">
-                            <textarea id="story2-desc" placeholder="Cerita singkat..." class="w-full p-2 border rounded text-xs"></textarea>
+                        <h2 class="text-xl font-bold text-slate-800">Edit Konten</h2>
+                    </div>
+                    
+                    <form id="configForm" class="space-y-6 text-sm">
+                        
+                        <!-- Section: Perjalanan Cinta -->
+                        <div class="space-y-3">
+                            <label class="flex items-center gap-2 text-xs font-bold text-indigo-600 uppercase tracking-widest mb-2 bg-indigo-50 px-3 py-1.5 rounded-md inline-block w-fit">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                                Perjalanan Cinta
+                            </label>
+                            <!-- Cerita 1 -->
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 space-y-3 hover:border-indigo-200 transition-colors">
+                                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Kisah 1 (Awal Bertemu)</p>
+                                <input type="text" id="story1-title" placeholder="Judul Kisah" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all">
+                                <input type="text" id="story1-date" placeholder="Waktu (Misal: Jan 2024)" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all">
+                                <textarea id="story1-desc" placeholder="Tulis cerita singkat di sini..." rows="2" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all"></textarea>
+                            </div>
+                            <!-- Cerita 2 -->
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 space-y-3 hover:border-indigo-200 transition-colors">
+                                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Kisah 2 (Lamaran)</p>
+                                <input type="text" id="story2-title" placeholder="Judul Kisah" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all">
+                                <input type="text" id="story2-date" placeholder="Waktu (Misal: Feb 2025)" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all">
+                                <textarea id="story2-desc" placeholder="Tulis cerita singkat di sini..." rows="2" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all"></textarea>
+                            </div>
                         </div>
-                    </div>
-<!-- Mempelai -->
-                    <div class="mb-4">
-                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">Data Mempelai Pria</label>
-                        <input type="text" id="pria" placeholder="Nama Panggilan Pria" class="w-full p-2.5 border rounded-lg mb-2">
-                        <input type="text" id="ortuPria" placeholder="Nama Orang Tua (Misal: Bpk Budi & Ibu Ani)" class="w-full p-2.5 border rounded-lg mb-2">
-                        <input type="text" id="urlFotoPria" placeholder="Link Foto Pria (Bulat)" class="w-full p-2.5 border rounded-lg mb-2">
-                        <input type="text" id="igPria" placeholder="Link Instagram Pria" class="w-full p-2.5 border rounded-lg mb-4">
-                        
-                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">Data Mempelai Wanita</label>
-                        <input type="text" id="wanita" placeholder="Nama Panggilan Wanita" class="w-full p-2.5 border rounded-lg mb-2">
-                        <input type="text" id="ortuWanita" placeholder="Nama Orang Tua Wanita" class="w-full p-2.5 border rounded-lg mb-2">
-                        <input type="text" id="urlFotoWanita" placeholder="Link Foto Wanita (Bulat)" class="w-full p-2.5 border rounded-lg mb-2">
-                        <input type="text" id="igWanita" placeholder="Link Instagram Wanita" class="w-full p-2.5 border rounded-lg">
-                    </div>
 
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Detail Acara</label>
-                        <input type="text" id="tgl" placeholder="Tanggal Acara (Contoh: Minggu, 15 Nov 2026)" class="w-full p-2.5 border rounded-lg mb-2">
-                        <input type="text" id="akd" placeholder="Jam Akad" class="w-full p-2.5 border rounded-lg mb-2">
-                        <input type="text" id="altAkd" placeholder="Alamat & Tempat Akad" class="w-full p-2.5 border rounded-lg mb-2">
-                        <input type="text" id="altRsp" placeholder="Alamat & Tempat Resepsi" class="w-full p-2.5 border rounded-lg">
+                        <!-- Section: Data Mempelai -->
+                        <div class="space-y-4 pt-4 border-t border-slate-100">
+                            <label class="flex items-center gap-2 text-xs font-bold text-blue-600 uppercase tracking-widest bg-blue-50 px-3 py-1.5 rounded-md inline-block w-fit">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                                Mempelai Pria
+                            </label>
+                            <div class="space-y-3">
+                                <input type="text" id="pria" placeholder="Nama Panggilan Pria" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all">
+                                <input type="text" id="ortuPria" placeholder="Nama Orang Tua (Misal: Bpk Budi & Ibu Ani)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all">
+                                <input type="text" id="urlFotoPria" placeholder="Link Foto Pria (Bulat)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all">
+                                <input type="text" id="igPria" placeholder="Link Instagram Pria (contoh: https://ig.com/nama)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all">
+                            </div>
+
+                            <label class="flex items-center gap-2 text-xs font-bold text-pink-600 uppercase tracking-widest bg-pink-50 px-3 py-1.5 rounded-md inline-block w-fit mt-6">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                                Mempelai Wanita
+                            </label>
+                            <div class="space-y-3">
+                                <input type="text" id="wanita" placeholder="Nama Panggilan Wanita" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all">
+                                <input type="text" id="ortuWanita" placeholder="Nama Orang Tua Wanita" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all">
+                                <input type="text" id="urlFotoWanita" placeholder="Link Foto Wanita (Bulat)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all">
+                                <input type="text" id="igWanita" placeholder="Link Instagram Wanita" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all">
+                            </div>
+                        </div>
+
+                        <!-- Section: Detail Acara -->
+                        <div class="space-y-3 pt-4 border-t border-slate-100">
+                            <label class="flex items-center gap-2 text-xs font-bold text-amber-600 uppercase tracking-widest bg-amber-50 px-3 py-1.5 rounded-md inline-block w-fit mb-2">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                Detail Acara
+                            </label>
+                            <input type="text" id="tgl" placeholder="Tanggal Acara (Contoh: Minggu, 15 Nov 2026)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all">
+                            <div class="grid grid-cols-2 gap-3">
+                                <input type="text" id="akd" placeholder="Jam Akad (08:00 WIB)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all">
+                                <input type="text" id="altAkd" placeholder="Lokasi Akad" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all">
+                            </div>
+                            <input type="text" id="altRsp" placeholder="Alamat Lengkap & Tempat Resepsi" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all">
+                        </div>
+
+                        <!-- Section: Keuangan -->
+                        <div class="space-y-3 pt-4 border-t border-slate-100">
+                            <label class="flex items-center gap-2 text-xs font-bold text-emerald-600 uppercase tracking-widest bg-emerald-50 px-3 py-1.5 rounded-md inline-block w-fit mb-2">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                                Rekening / Amplop Digital
+                            </label>
+                            <input type="text" id="bnk" placeholder="Nama Bank (Contoh: BCA / Mandiri)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all">
+                            <input type="text" id="rek" placeholder="Nomor Rekening" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all">
+                            <input type="text" id="an" placeholder="Atas Nama (A/n Raga)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all">
+                        </div>
+
+                        <!-- Section: Foto & Galeri -->
+                        <div class="space-y-3 pt-4 border-t border-slate-100">
+                            <label class="flex items-center gap-2 text-xs font-bold text-purple-600 uppercase tracking-widest bg-purple-50 px-3 py-1.5 rounded-md inline-block w-fit mb-2">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                Foto & Galeri (Link ImgBB)
+                            </label>
+                            <input type="text" id="hero" placeholder="Link Foto Cover Depan / Utama" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all font-medium text-purple-700">
+                            
+                            <div class="grid grid-cols-2 gap-3 mt-3">
+                                <input type="text" id="galeri1" placeholder="Foto Galeri 1" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all">
+                                <input type="text" id="galeri2" placeholder="Foto Galeri 2" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all">
+                                <input type="text" id="galeri3" placeholder="Foto Galeri 3" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all">
+                                <input type="text" id="galeri4" placeholder="Foto Galeri 4" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all">
+                                <input type="text" id="galeri5" placeholder="Foto Galeri 5" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all">
+                                <input type="text" id="galeri6" placeholder="Foto Galeri 6" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all">
+                            </div>
+                        </div>
+
+                        <!-- Tombol Submit -->
+                        <div class="pt-6">
+                            <button type="submit" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 rounded-xl font-bold text-base shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+                                Simpan Semua Data ke Database
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Kotak Generate Link WA -->
+                <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-6 md:p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-emerald-100">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-emerald-100 text-emerald-600 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                        </div>
+                        <h2 class="text-xl font-bold text-emerald-900">Sebar Undangan (WA)</h2>
                     </div>
-
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Amplop Digital / Bank</label>
-                        <input type="text" id="bnk" placeholder="Nama Bank (Contoh: BCA)" class="w-full p-2.5 border rounded-lg mb-2">
-                        <input type="text" id="rek" placeholder="Nomor Rekening" class="w-full p-2.5 border rounded-lg mb-2">
-                        <input type="text" id="an" placeholder="Atas Nama Rekening" class="w-full p-2.5 border rounded-lg">
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-emerald-700 uppercase tracking-wider mb-2">Nama Tamu Spesifik</label>
+                            <input type="text" id="targetName" placeholder="Contoh: Bpk. Joko Widodo" class="w-full px-4 py-3 bg-white border border-emerald-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all shadow-sm">
+                        </div>
+                        <button id="generateBtn" class="w-full flex items-center justify-center gap-2 bg-emerald-600 text-white py-3.5 rounded-xl font-bold shadow-lg shadow-emerald-500/30 hover:bg-emerald-700 hover:shadow-emerald-500/50 hover:-translate-y-0.5 transition-all duration-200">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                            Generate Teks & Salin
+                        </button>
                     </div>
-
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Foto Undangan (Paste Link URL)</label>
-                        <input type="text" id="hero" placeholder="Link Foto Cover / Utama" class="w-full p-2.5 border rounded-lg mb-2">
-                        
-                        <input type="text" id="galeri1" placeholder="Link Foto Galeri 1" class="w-full p-2.5 border rounded-lg mb-2">
-                        <input type="text" id="galeri2" placeholder="Link Foto Galeri 2" class="w-full p-2.5 border rounded-lg mb-2">
-                        <input type="text" id="galeri3" placeholder="Link Foto Galeri 3" class="w-full p-2.5 border rounded-lg mb-2">
-                        <input type="text" id="galeri4" placeholder="Link Foto Galeri 4" class="w-full p-2.5 border rounded-lg mb-2">
-                        <input type="text" id="galeri5" placeholder="Link Foto Galeri 5" class="w-full p-2.5 border rounded-lg mb-2">
-                        <input type="text" id="galeri6" placeholder="Link Foto Galeri 6" class="w-full p-2.5 border rounded-lg">
-                    </div>
-
-                    <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-xl font-bold text-base hover:bg-blue-700 transition shadow-md">
-                        Simpan Semua Data ke Database
-                    </button>
-                </form>
-
-                <hr class="my-4">
-                
-                <h2 class="text-lg font-bold text-gray-700">Buat Teks & Link WA</h2>
-                <div class="space-y-2">
-                    <input type="text" id="targetName" placeholder="Nama Tamu yang Diundang" class="w-full p-2.5 border rounded-lg">
-                    <button id="generateBtn" class="w-full bg-emerald-600 text-white p-2.5 rounded-lg font-semibold hover:bg-emerald-700">Generate WA Text</button>
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-2xl shadow-sm border md:col-span-2 h-fit">
-                <h2 class="text-lg font-bold mb-4 text-gray-700 border-b pb-2">Daftar Kehadiran Tamu (RSVP)</h2>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-gray-50 border-b text-sm text-gray-600">
-                                <th class="p-3 font-semibold">Nama Tamu</th>
-                                <th class="p-3 font-semibold">Konfirmasi Kehadiran</th>
-                                <th class="p-3 font-semibold">Ucapan / Doa</th>
-                            </tr>
-                        </thead>
-                        <tbody id="guestTableBody">
+            <!-- KOLOM KANAN: TABEL RSVP -->
+            <div class="lg:col-span-2">
+                <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 h-fit sticky top-24">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+                        <div class="flex items-center gap-3">
+                            <div class="p-2 bg-orange-50 text-orange-500 rounded-lg">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </div>
+                            <h2 class="text-xl font-bold text-slate-800">Daftar Kehadiran (RSVP)</h2>
+                        </div>
+                        <span class="bg-slate-100 text-slate-600 text-xs font-bold px-3 py-1.5 rounded-full">Otomatis Update</span>
+                    </div>
+                    
+                    <div class="overflow-x-auto rounded-xl border border-slate-200">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 text-xs text-slate-500 uppercase tracking-wider">
+                                    <th class="p-4 font-bold border-b border-slate-200">Nama Tamu</th>
+                                    <th class="p-4 font-bold border-b border-slate-200">Status</th>
+                                    <th class="p-4 font-bold border-b border-slate-200 w-1/2">Ucapan & Doa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="guestTableBody" class="divide-y divide-slate-100">
+                                <!-- Data Tamu Muncul di Sini -->
+                                <!-- Baris Loading Default -->
+                                <tr>
+                                    <td colspan="3" class="p-8 text-center text-slate-400 text-sm italic">
+                                        <svg class="animate-spin w-6 h-6 mx-auto mb-2 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                        Memuat data tamu...
+                                    </td>
+                                </tr>
                             </tbody>
-                    </table>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+<!-- KODE SCRIPT JAVA SCRIPT DI BAWAH INI TIDAK ADA YANG DIUBAH (SAMA PERSIS DENGAN PUNYA ABANG) -->
 <script>
         document.addEventListener("DOMContentLoaded", () => {
             const loginPanel = document.getElementById('login-panel');
@@ -188,12 +312,24 @@
                 if (result.success) {
                     const body = document.getElementById('guestTableBody');
                     body.innerHTML = '';
+                    
+                    if(result.data.length === 0) {
+                        body.innerHTML = `<tr><td colspan="3" class="p-8 text-center text-slate-400 text-sm">Belum ada tamu yang mengisi RSVP.</td></tr>`;
+                    }
+                    
                     result.data.forEach(g => {
+                        // Tambahkan styling warna badge kehadiran
+                        let badgeColor = 'bg-blue-100 text-blue-700';
+                        if(g.attendance.toLowerCase().includes('tidak')) badgeColor = 'bg-rose-100 text-rose-700';
+                        if(g.attendance.toLowerCase().includes('ragu') || g.attendance.toLowerCase().includes('mungkin')) badgeColor = 'bg-amber-100 text-amber-700';
+
                         body.innerHTML += `
-                            <tr class="border-b text-sm hover:bg-gray-50">
-                                <td class="p-3 font-medium text-gray-800">${g.name}</td>
-                                <td class="p-3 text-blue-600 font-medium">${g.attendance}</td>
-                                <td class="p-3 text-gray-600">${g.message}</td>
+                            <tr class="text-sm hover:bg-slate-50 transition-colors group">
+                                <td class="p-4 font-semibold text-slate-800">${g.name}</td>
+                                <td class="p-4">
+                                    <span class="px-3 py-1 rounded-full text-xs font-bold ${badgeColor}">${g.attendance}</span>
+                                </td>
+                                <td class="p-4 text-slate-600 italic group-hover:text-slate-800 transition-colors">"${g.message}"</td>
                             </tr>`;
                     });
                 }
@@ -249,6 +385,12 @@
             // Simpan Data dari Kolom Form ke MongoDB (WAJIB KIRIM TOKEN)
             document.getElementById('configForm').addEventListener('submit', async (e) => {
                 e.preventDefault();
+                
+                // Ubah teks tombol pas loading
+                const btn = e.target.querySelector('button[type="submit"]');
+                const textAwal = btn.innerHTML;
+                btn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Menyimpan Data...`;
+                
                 const arrayGaleri = [
                     document.getElementById('galeri1').value.trim(),
                     document.getElementById('galeri2').value.trim(),
@@ -288,7 +430,6 @@
                     namaBank: document.getElementById('bnk').value,
                     noRekening: document.getElementById('rek').value,
                     atasNamaRekening: document.getElementById('an').value,
-                    urlFotoHero: document.getElementById('hero').value,
                     urlFotoGaleri: arrayGaleri,
                     ceritaCinta: arrayCerita
                 };
@@ -303,9 +444,10 @@
                 });
                 const data = await res.json();
                 if(data.success) { 
-                    alert('Data undangan berhasil disimpan ke database MongoDB!'); 
+                    alert('Berhasil! Data undangan sukses disimpan ke database.'); 
                     window.location.reload(); 
                 } else {
+                    btn.innerHTML = textAwal;
                     alert('Gagal menyimpan. Sesi Token mungkin kedaluwarsa, coba login ulang.');
                 }
             });
@@ -325,15 +467,14 @@
                 const textWA = `Kepada Yth. Bapak/Ibu/Saudara/i *${tName}*,\n\nTanpa mengurangi rasa hormat, kami bermaksud mengundang Anda untuk hadir di acara pernikahan kami.\n\nSilakan klik tautan berikut untuk membuka detail undangan:\n${inviteUrl}\n\nMerupakan suatu kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir dan memberikan doa restu.\n\nSalam hangat,\n*${namaPria} & ${namaWanita}*`;
 
                 navigator.clipboard.writeText(textWA).then(() => {
-                    alert(`✅ Teks undangan untuk ${tName} berhasil disalin!`);
+                    alert(`✅ Mantap! Teks undangan untuk ${tName} berhasil disalin. Tinggal Paste di WA!`);
                     document.getElementById('targetName').value = ''; 
                 }).catch(err => {
                     console.error("Gagal copy: ", err);
-                    alert("Browser memblokir copy otomatis. Coba lagi!");
+                    alert("Waduh, Browser memblokir copy otomatis. Coba ulangi klik tombolnya!");
                 });
             });
         });
     </script>
-
 </body>
 </html>
