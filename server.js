@@ -80,7 +80,15 @@ app.get('/api/admin/guests', isAdmin, async (req, res) => {
         res.status(500).json({ success: false, error: error.message });
     }
 });
-
+app.delete('/api/admin/guests/:id', isAdmin, async (req, res) => {
+    try {
+        await connectDB(); // Bangunkan DB
+        await Guest.findByIdAndDelete(req.params.id);
+        res.json({ success: true, message: 'Data tamu berhasil dihapus' });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
 app.post('/api/admin/update-info', isAdmin, async (req, res) => {
     try {
         await connectDB(); // Bangunkan DB sebelum menyimpan data!
