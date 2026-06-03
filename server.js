@@ -63,19 +63,19 @@ app.post('/api/rsvp', async (req, res) => {
 app.post('/api/admin/login', (req, res) => {
     const { username, password } = req.body;
     
-    // 3. Username dan Password Admin ditanam langsung di sini
     if (username === 'adminnikah' && password === 'rahasiabanget') {
-        req.session.isLoggedIn = true;
-        res.json({ success: true });
+        // req.session SUDAH DIHAPUS, GANTI JADI KIRIM TOKEN
+        res.json({ success: true, token: 'TOKEN_RAHASIA_RAGA_2026' });
     } else {
         res.status(400).json({ success: false, message: 'Kredensial salah' });
     }
 });
 
 app.post('/api/admin/logout', (req, res) => {
-    req.session.destroy();
+    // Karena pakai token di HP/Laptop, backend tidak perlu hancurkan session lagi
     res.json({ success: true });
 });
+
 
 app.get('/api/admin/guests', isAdmin, async (req, res) => {
     try {
