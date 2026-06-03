@@ -227,6 +227,7 @@
                                     <th class="p-4 font-bold border-b border-slate-200">Nama Tamu</th>
                                     <th class="p-4 font-bold border-b border-slate-200">Status</th>
                                     <th class="p-4 font-bold border-b border-slate-200 w-1/2">Ucapan & Doa</th>
+                                    <th class="p-4 font-bold border-b border-slate-200 text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody id="guestTableBody" class="divide-y divide-slate-100">
@@ -475,6 +476,61 @@
                 });
             });
         });
+    // A. Trigger otomatis baca data username saat ini
+            async function loadAccountInfo() {
+                try {
+                    const res = await fetch('/api/admin/credentials', {
+                        headers: { 'Authorization': sessionStorage.getItem('adminToken') }
+                    });
+                    const result = await res.json();
+                    if (result.success && document.getElementById('newUsername')) {
+                        document.getElementById('newUsername').value = result.username;
+                    }
+                } catch (error) { console.log(error); }
+            }
+
+            // B. Eksekusi Hapus Tamu ke MongoDB
+            window.hapusTamu = async function(id) {
+                if(confirm('Yakin nih Bang mau hapus data tamu ini? Data akan hilang permanen lho.')) {
+                    try {
+                        const res = await fetch(`/api/admin/guests/${id}`, {
+                            method: 'DELETE',
+                            headers: { 'Authorization': sessionStorage.getItem('adminToken') }
+                        });
+                        const result = await res.json();
+                        if(result.success) { loadDataTamu(); } 
+                        else { alert('Gagal menghapus data: ' + result.error); }
+                    } catch (error) { alert('Terjadi kesalahan saat menghapus data.'); }
+                }
+            }
+
+            // C. Eksekusi Simpan Perubahan Akun Baru
+            document.getElementById('accountForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if(!confirm('Yakin mau ganti akun? Setelah sukses kamu harus login ulang ya!')) return;
+
+                const newUsername = document.getElementById('newUsername').value.trim();
+                const newPassword = document.getElementById('newPassword').value.trim();
+
+                try {
+                    const res = await fetch('/api/admin/change-credentials', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': sessionStorage.getItem('adminToken') },
+                        body: JSON.stringify({ newUsername, newPassword })
+                    });
+                    const result = await res.json();
+                    if(result.success) {
+                        alert('Akun berhasil diubah! Silakan login kembali dengan Password baru.');
+                        document.getElementById('logoutBtn').click(); 
+                    } else { alert('Gagal mengubah akun.'); }
+                } catch (error) { alert('Error sistem saat mengubah akun.'); }
+            });
+
+            // Tambahkan pemanggil akun ini di dalam fungsi showDashboard() milik Abang di atas ya!
+            // Tulis saja: loadAccountInfo(); tepat di bawah loadConfigAwal();
+
+        }); // 👈 Ini batas akhir penutup DOMContentLoaded asli bawaan Abang
+    </script>
     </script>
 </body>
 </html>
