@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-const mongoURI = 'mongodb+srv://undangan_digital:raga151204@cluster0.rutgg.mongodb.net/undangan_digital?retryWrites=true&w=majority';
+const mongoURI = process.env.MONGODB_URI;
 
 const connectDB = async () => {
     if (mongoose.connection.readyState >= 1) return;
